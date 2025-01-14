@@ -9,7 +9,7 @@ function NavBar() {
     <nav className="navbar">
       {/* Logo or brand name on the left */}
       <div className="navbar-logo">
-        <Link to="/home" className="navbar-brand">Sanctuary Space</Link>
+        <Link to="/" className="navbar-brand">Sanctuary Space</Link>
       </div>
 
       {/* Navigation links */}

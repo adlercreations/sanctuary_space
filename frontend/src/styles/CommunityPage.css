@@ -1,0 +1,35 @@
+/* frontend/src/styles/CommunityPage.css */
+
+.community-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #fefaf0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.daytime-motif {
+    position: absolute;
+    inset: 0;
+    background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
+    opacity: 0.25;
+    z-index: 0;
+}
+  
+.community-container h1,
+.community-content {
+    z-index: 1;
+    text-align: center;
+    max-width: 800px; 
+    margin: 1rem;
+}
+  
+.community-content {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}

@@ -1,0 +1,36 @@
+/* frontend/src/styles/ShopPage.css */
+
+.shop-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #fffef6; /* slightly lighter cream, for example */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+/* Reuse the daytime motif if you want that same look */
+.daytime-motif {
+    position: absolute;
+    inset: 0;
+    background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
+    opacity: 0.2; /* slightly less visible for the Shop page */
+    z-index: 0;
+}
+  
+/* Ensure the heading & main content are on top */
+.shop-container h1,
+.shop-content {
+    z-index: 1;
+    text-align: center;
+    color: #333;
+    margin: 1rem;
+}
+  
+.shop-content {
+    max-width: 1000px; /* or any width you like */
+    width: 90%;
+}

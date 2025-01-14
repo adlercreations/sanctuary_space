@@ -1,0 +1,38 @@
+/* frontend/src/styles/AboutPage.css */
+
+.about-container {
+    position: relative;
+    width: 100vw;       /* Fill entire viewport width */
+    height: 100vh;      /* Fill entire viewport height */
+    overflow: hidden;
+    background-color: #fdf5e6; /* a light daytime cream */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+/* The background motif (optional) */
+  .daytime-motif {
+    position: absolute;
+    inset: 0;  /* fill entire container */
+    background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
+    opacity: 0.3;
+    z-index: 0;
+}
+  
+/* Make heading & content appear above the motif */
+.about-container h1,
+.about-content {
+    z-index: 1;
+    max-width: 800px; /* so text doesn’t stretch too wide */
+    text-align: center;
+    margin: 1rem;
+}
+  
+/* If you want some spacing or custom font styling */
+.about-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
