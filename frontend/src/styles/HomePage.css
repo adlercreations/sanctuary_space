@@ -1,0 +1,71 @@
+/* frontend/src/styles/HomePage.css */
+
+.home-container {
+    position: relative;          /* so absolutely-positioned children can anchor here */
+    width: 100vw;
+    height: 100vh;
+    background-color: #fdf5e6;   /* a light, daytime cream */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;     /* vertically center content if desired */
+}
+  
+/* The background motif for daytime */
+.daytime-motif {
+    position: absolute;
+    inset: 0;  /* fills entire container */
+    background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
+    opacity: 0.3;  /* make it semi-transparent */
+    z-index: 0;    /* behind other elements */
+}
+  
+/* Headline above the cards */
+.home-container h1 {
+    z-index: 1; /* on top of the motif */
+    margin-top: 2rem;
+    color: #333; /* or pick a brand-friendly color */
+}
+  
+/* The cards container has a higher z-index to appear above .daytime-motif */
+.cards-container {
+    z-index: 1;
+    margin-top: 2rem;
+    width: 80%;
+    max-width: 1400px; /* or remove if you want it fully wide */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+  
+/* The individual cards */
+.home-card {
+    background: rgba(255, 255, 255, 0.9); /* slightly translucent white background */
+    color: #333;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+  
+.home-card:hover {
+    transform: scale(1.03);
+}
+  
+/* You can customize each card with brand colors, icons, or extra styling */
+.about-card {
+    /* e.g., a terracotta border or accent */
+    border: 2px solid #d56a47; 
+}
+.shop-card {
+    /* e.g., a chartreuse border or accent */
+    border: 2px solid #adff2f;
+}
+.community-card {
+    /* e.g., a navy or sage accent */
+    border: 2px solid #090c22;
+}

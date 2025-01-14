@@ -1,0 +1,133 @@
+/* frontend/src/components/EntrancePage.css */
+
+/* 
+  MASTER container that fills the whole viewport 
+  with a nighttime + terracotta gradient or background.
+*/
+.entrance-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  
+    /* Example gradient from dark navy to terracotta */
+    background: linear-gradient(
+      135deg,
+      #090c22 0%,
+      #521c0e 100%
+    );
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* Optional fade-in animation for the entire screen */
+    animation: fadeIn 1.5s ease-out forwards;
+}
+  
+/* A subtle overlay or “nighttime” fade that sits on top */
+.nighttime-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* a dark overlay */
+    pointer-events: none; /* don't block clicks */
+    z-index: 1;
+}
+  
+/* Jungle motif background layer */
+.jungle-motif {
+    position: absolute;
+    inset: 0;
+    background: url('/assets/jungle-bg.png') no-repeat center/cover;
+    /* For a more subtle effect, reduce opacity or 
+       darken the image using a filter */
+    opacity: 0.6;
+    z-index: 0; /* behind the overlay and door */
+}
+  
+/* The ARCHED DOOR */
+.arched-door {
+    z-index: 2; /* above motif and overlay */
+    width: 220px;
+    height: 350px;
+  
+    /* Instead of just border-radius, let’s try a 
+       clip-path to get a pointed arch shape 
+       (like a Mughal/Islamic arch). */
+    background-color: #d56a47; /* Terracotta door */
+    clip-path: polygon(
+      50% 0%,  /* top center */
+      90% 20%,
+      90% 100%,
+      10% 100%,
+      10% 20%
+    );
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  
+    transition: transform 0.4s ease;
+}
+  
+/* Text inside the door */
+.arched-door p {
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 0 1rem;
+}
+  
+/* Hover effect for the door (simple glow) */
+.arched-door:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+}
+  
+/* 
+     When the door is "open," we can animate 
+     it scaling down or rotating out. 
+*/
+.door-open {
+    animation: doorOpen 1s forwards ease-in-out;
+}
+  
+/* A text hint near the door */
+.entrance-hint {
+    z-index: 2;
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    font-style: italic;
+    font-size: 1rem;
+}
+  
+/* KEYFRAMES */
+  
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+  
+@keyframes doorOpen {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(0.9) rotate(-3deg);
+    }
+    50% {
+      transform: scale(0.8) rotate(3deg);
+    }
+    100% {
+      transform: scaleY(0);
+    }
+}

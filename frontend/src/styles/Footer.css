@@ -1,0 +1,11 @@
+.app-footer {
+    background-color: #fdf5e6; /* or a terracotta / brand color */
+    padding: 1rem;
+    text-align: center;
+}
+  
+.footer-content p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
