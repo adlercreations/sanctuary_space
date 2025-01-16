@@ -1,35 +1,53 @@
 // frontend/src/pages/ShopPage.jsx
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getRequest } from '../services/api';
 import '../styles/ShopPage.css';
-import ProductList from '../components/ProductList';
 
 function ShopPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getRequest('/products')
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Fetch products error:', err);
+        setError('Failed to load products.');
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <p>Loading products...</p>;
+  if (error)   return <p>{error}</p>;
+
   return (
     <div className="shop-container">
       <div className="daytime-motif" />
+
       <h1>Wellness Teas & Marketplace</h1>
+
+      {/* Wrap the product listing in a content div for spacing */}
       <div className="shop-content">
-        {/* Here’s the product listing or other elements */}
-        <ProductList />
+        <div className="product-list">
+          {products.map((product) => (
+            <Link to={`/product/${product.id}`} key={product.id} className="product-card">
+              <h3>{product.name}</h3>
+              <p>Price: ${product.price.toFixed(2)}</p>
+              {product.image_url && (
+                <img src={product.image_url} alt={product.name} style={{ maxWidth: '100px' }} />
+              )}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default ShopPage;
-
-
-
-// import React from 'react';
-// import ProductList from '../components/ProductList';
-
-// function ShopPage() {
-//   return (
-//     <div style={{ padding: '2rem' }}>
-//       <h2>Wellness Teas & Marketplace</h2>
-//       <ProductList />
-//     </div>
-//   );
-// }
-
-// export default ShopPage;

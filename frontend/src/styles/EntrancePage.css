@@ -1,9 +1,5 @@
 /* frontend/src/components/EntrancePage.css */
 
-/* 
-  MASTER container that fills the whole viewport 
-  with a nighttime + terracotta gradient or background.
-*/
 .entrance-container {
     position: relative;
     width: 100vw;

@@ -1,3 +1,4 @@
+// frontend/src/components/ProductList.jsx
 import React, { useEffect, useState } from 'react';
 import { getRequest } from '../services/api';
 import { Link } from 'react-router-dom';

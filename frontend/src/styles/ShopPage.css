@@ -3,34 +3,62 @@
 .shop-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh; /* allow scrolling if content grows */
     overflow: hidden;
-    background-color: #fffef6; /* slightly lighter cream, for example */
+    background-color: #fffef6;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+  
+/* no justify-content: center so the header moves up */
 }
   
-/* Reuse the daytime motif if you want that same look */
+/* Background motif stays the same */
 .daytime-motif {
     position: absolute;
     inset: 0;
     background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
-    opacity: 0.2; /* slightly less visible for the Shop page */
+    opacity: 0.2;
     z-index: 0;
 }
   
-/* Ensure the heading & main content are on top */
-.shop-container h1,
-.shop-content {
+.shop-container h1 {
     z-index: 1;
     text-align: center;
     color: #333;
-    margin: 1rem;
+    margin-top: 2rem;   /* push it down from the top a bit */
+    margin-bottom: 1rem;/* small gap below the header */
 }
   
+/* The main content wrapper */
 .shop-content {
-    max-width: 1000px; /* or any width you like */
-    width: 90%;
+    z-index: 1;         /* above the motif */
+    width: 80%;
+    max-width: 1200px;
+    margin-bottom: 2rem;  /* space at bottom */
+    /* We can also add margin-top if we want more spacing from the header */
+}
+  
+/* The product-list is flex-wrapped, for example: */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center; /* center the product cards horizontally */
+}
+  
+/* Basic product-card styling */
+.product-card {
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 200px;
+    padding: 1rem;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    transition: transform 0.2s;
+}
+  
+.product-card:hover {
+    transform: scale(1.03);
 }

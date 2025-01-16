@@ -1,6 +1,7 @@
+// frontend/src/App.jsx
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { CartProvider } from './components/CartContext';
 import EntrancePage from './components/EntrancePage';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -13,29 +14,29 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <BrowserRouter>
-      {/* Optional Global Nav */}
-      <NavBar />
+    <CartProvider>
+      <BrowserRouter>
+        {/* Optional Global Nav */}
+        <NavBar />
 
-      <Routes>
-        <Route path="/" element={<EntrancePage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/shop/:productId" element={<ProductDetail />} />
-        <Route path="/community" element={<CommunityPage />} />
-        {/* Add cart route if you want a dedicated page */}
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<EntrancePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/:productId" element={<ProductDetail />} />
+          <Route path="/community" element={<CommunityPage />} />
+          {/* Add cart route if you want a dedicated page */}
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
 
-      <Footer />
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 
 export default App;
-
-
 // import React from 'react';
 // import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import HomePage from './pages/HomePage';
@@ -100,3 +101,5 @@ export default App;
 // }
 
 // export default App
+
+

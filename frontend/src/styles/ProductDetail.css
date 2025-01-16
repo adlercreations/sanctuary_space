@@ -1,0 +1,43 @@
+/* frontend/src/components/ProductDetail.jsx*/
+
+.container {
+    padding: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+  
+.heading {
+    margin-bottom: 1rem;
+    font-size: 1.8rem; 
+    color: #333;
+}
+  
+.image {
+    max-width: 300px;
+    display: block;
+    margin: 1rem auto;
+}
+  
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+  
+.description {
+    line-height: 1.6;
+    margin: 1rem auto;
+}
+  
+.button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background-color: #d56a47;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 1rem;
+}

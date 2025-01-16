@@ -1,3 +1,4 @@
+# backend/routes/product_routes.py
 from flask import Blueprint, jsonify, request
 from models import Product
 from models import db
