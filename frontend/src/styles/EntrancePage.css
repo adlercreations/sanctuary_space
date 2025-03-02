@@ -1,5 +1,4 @@
 /* frontend/src/components/EntrancePage.css */
-
 .entrance-container {
     position: relative;
     width: 100vw;
@@ -21,7 +20,7 @@
     animation: fadeIn 1.5s ease-out forwards;
 }
   
-/* A subtle overlay or “nighttime” fade that sits on top */
+/* A subtle overlay or "nighttime" fade that sits on top */
 .nighttime-overlay {
     position: absolute;
     inset: 0;
@@ -47,9 +46,7 @@
     width: 220px;
     height: 350px;
   
-    /* Instead of just border-radius, let’s try a 
-       clip-path to get a pointed arch shape 
-       (like a Mughal/Islamic arch). */
+    /* Updated clip-path for a rounded top while keeping the rest of the shape */
     background-color: #d56a47; /* Terracotta door */
     clip-path: polygon(
       50% 0%,  /* top center */
@@ -58,6 +55,8 @@
       10% 100%,
       10% 20%
     );
+    border-top-left-radius: 50px; /* Rounded top left */
+    border-top-right-radius: 50px; /* Rounded top right */
   
     display: flex;
     align-items: center;

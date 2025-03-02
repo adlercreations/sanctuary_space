@@ -1,5 +1,4 @@
 /* frontend/src/styles/HomePage.css */
-
 .home-container {
     position: relative;          /* so absolutely-positioned children can anchor here */
     width: 100vw;

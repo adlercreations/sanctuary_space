@@ -1,5 +1,4 @@
 // frontend/src/components/EntrancePage.jsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EntrancePage.css';
@@ -38,32 +37,3 @@ function EntrancePage() {
 }
 
 export default EntrancePage;
-
-
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import '../styles/EntrancePage.css'; // or inline styling
-
-// function EntrancePage() {
-//   const navigate = useNavigate();
-
-//   const handleDoorClick = () => {
-//     // Animate door open, then navigate
-//     // For simplicity:
-//     navigate('/home');
-//   };
-
-//   return (
-//     <div className="entrance-container">
-//       <div className="jungle-motif">
-//         {/* Some stylized graphic or background image */}
-//       </div>
-//       <div className="arched-door" onClick={handleDoorClick}>
-//         {/* The arched door could be an image or a div styled with border-radius */}
-//         <p>Enter Sanctuary Space</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default EntrancePage;

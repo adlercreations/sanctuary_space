@@ -1,3 +1,4 @@
+// frontend/src/components/Cart.jsx
 import React, { useState } from 'react';
 
 function Cart() {

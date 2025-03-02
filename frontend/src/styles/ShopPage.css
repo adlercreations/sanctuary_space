@@ -1,5 +1,4 @@
 /* frontend/src/styles/ShopPage.css */
-
 .shop-container {
     position: relative;
     width: 100vw;
@@ -9,8 +8,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  
-/* no justify-content: center so the header moves up */
 }
   
 /* Background motif stays the same */
