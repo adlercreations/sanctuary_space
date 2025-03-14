@@ -1,5 +1,5 @@
 // frontend/src/components/EntrancePage.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EntrancePage.css';
 
@@ -8,10 +8,10 @@ function EntrancePage() {
   const [doorOpened, setDoorOpened] = useState(false);
 
   const handleDoorClick = () => {
-    // Trigger door open animation, then navigate
+    // Trigger door open animation
     setDoorOpened(true);
 
-    // Delay the navigate by, say, 1 second to let the animation play
+    // Delay the navigate to let the animation play
     setTimeout(() => {
       navigate('/home');
     }, 1000);

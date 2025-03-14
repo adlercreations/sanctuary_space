@@ -1,0 +1,14 @@
+.homepage-auth .auth-buttons .login-button,
+.homepage-auth .auth-buttons .signup-button {
+  background-color: #d56a47 !important;
+  color: white !important;
+  min-width: 150px !important;
+}
+
+/* Add !important to override any conflicting styles */
+.homepage-auth button.login-button,
+.homepage-auth button.signup-button {
+  background-color: #d56a47 !important;
+  color: white !important;
+  min-width: 150px !important;
+} 

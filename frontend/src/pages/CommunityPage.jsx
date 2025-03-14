@@ -1,16 +1,47 @@
 // frontend/src/pages/CommunityPage.jsx
-import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Forum from '../components/forum/Forum';
 import '../styles/CommunityPage.css';
 
 function CommunityPage() {
   return (
     <div className="community-container">
       <div className="daytime-motif" />
-      <h1>Community</h1>
-      <div className="community-content">
-        <p>Join our forum, read our blog, and check out upcoming events.</p>
-        <p>We value your thoughts and ideas—share them here!</p>
+      <div className="community-top-content">
+        <h1>Community</h1>
+        <div className="community-content">
+          <p>Join our forum, read our blog, and check out upcoming events.</p>
+          <p>We value your thoughts and ideas—share them here!</p>
+        </div>
       </div>
+      
+      <Routes>
+        <Route path="/forum/*" element={<Forum />} />
+        <Route 
+          path="/" 
+          element={
+            <div className="community-sections">
+              <div className="community-section">
+                <h2>Forum</h2>
+                <p>Join discussions with other community members about wellness, self-care, and more.</p>
+                <a href="/community/forum" className="section-link">Visit Forum</a>
+              </div>
+              
+              <div className="community-section">
+                <h2>Blog</h2>
+                <p>Read articles from our team and guest contributors about mindfulness and wellness.</p>
+                <a href="#" className="section-link">Read Blog</a>
+              </div>
+              
+              <div className="community-section">
+                <h2>Events</h2>
+                <p>Discover upcoming workshops, retreats, and community gatherings.</p>
+                <a href="#" className="section-link">View Events</a>
+              </div>
+            </div>
+          } 
+        />
+      </Routes>
     </div>
   );
 }

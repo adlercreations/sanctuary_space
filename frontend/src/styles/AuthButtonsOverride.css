@@ -1,0 +1,19 @@
+/* Override styles for auth buttons */
+.auth-buttons-container .auth-buttons .login-button,
+.auth-buttons-container .auth-buttons .signup-button,
+.auth-buttons-container .auth-user-info .logout-button,
+button.auth-button {
+  background-color: #d56a47 !important; /* Terracotta color with !important */
+  color: white !important;
+  min-width: 150px !important;
+  transition: all 0.3s ease !important;
+}
+
+.auth-buttons-container .auth-buttons .login-button:hover,
+.auth-buttons-container .auth-buttons .signup-button:hover,
+.auth-buttons-container .auth-user-info .logout-button:hover,
+button.auth-button:hover {
+  background-color: #c25539 !important; /* Darker terracotta for hover */
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+} 

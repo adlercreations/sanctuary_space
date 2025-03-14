@@ -2,12 +2,19 @@
 .shop-container {
     position: relative;
     width: 100vw;
-    min-height: 100vh; /* allow scrolling if content grows */
-    overflow: hidden;
-    background-color: #fffef6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #eeeadf;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    padding-top: 2rem;
+    box-sizing: border-box;
+    margin: 0;
+    left: 0;
+    right: 0;
 }
   
 /* Background motif stays the same */
@@ -17,45 +24,124 @@
     background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
     opacity: 0.2;
     z-index: 0;
+    width: 100%;
+}
+  
+/* Top content wrapper */
+.shop-top-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    z-index: 1;
 }
   
 .shop-container h1 {
     z-index: 1;
     text-align: center;
     color: #333;
-    margin-top: 2rem;   /* push it down from the top a bit */
-    margin-bottom: 1rem;/* small gap below the header */
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    width: 100%;
 }
   
 /* The main content wrapper */
 .shop-content {
-    z-index: 1;         /* above the motif */
-    width: 80%;
-    max-width: 1200px;
-    margin-bottom: 2rem;  /* space at bottom */
-    /* We can also add margin-top if we want more spacing from the header */
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin-bottom: 2rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
   
 /* The product-list is flex-wrapped, for example: */
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center; /* center the product cards horizontally */
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
 }
   
 /* Basic product-card styling */
 .product-card {
     background: #fff;
     border: 1px solid #ccc;
-    width: 200px;
-    padding: 1rem;
+    width: 250px;
+    padding: 1.5rem;
     text-decoration: none;
     color: #333;
     text-align: center;
     transition: transform 0.2s;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 250px;
+    box-sizing: border-box;
 }
   
 .product-card:hover {
     transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.product-card p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.product-card img {
+    max-width: 150px !important;
+    max-height: 150px;
+    object-fit: contain;
+    margin-top: auto;
+}
+
+/* Add responsive adjustments for different screen sizes */
+@media (max-width: 768px) {
+    .shop-container {
+        padding: 1.5rem 1rem;
+        padding-top: 1.5rem;
+    }
+    
+    .shop-container h1 {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .shop-content {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .product-list {
+        gap: 1rem;
+    }
+    
+    .product-card {
+        width: 200px;
+        padding: 1rem;
+        min-height: 200px;
+    }
+    
+    .product-card img {
+        max-width: 100px !important;
+        max-height: 100px;
+    }
 }

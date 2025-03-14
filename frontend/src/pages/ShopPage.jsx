@@ -1,7 +1,7 @@
 // frontend/src/pages/ShopPage.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getRequest } from '../services/api';
+import { apiService } from '../services/api';
 import '../styles/ShopPage.css';
 
 function ShopPage() {
@@ -10,7 +10,7 @@ function ShopPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getRequest('/products')
+    apiService.get('/products')
       .then((data) => {
         setProducts(data);
         setLoading(false);
@@ -28,21 +28,23 @@ function ShopPage() {
   return (
     <div className="shop-container">
       <div className="daytime-motif" />
+      
+      <div className="shop-top-content">
+        <h1>Wellness Teas & Marketplace</h1>
 
-      <h1>Wellness Teas & Marketplace</h1>
-
-      {/* Wrap the product listing in a content div for spacing */}
-      <div className="shop-content">
-        <div className="product-list">
-          {products.map((product) => (
-            <Link to={`/product/${product.id}`} key={product.id} className="product-card">
-              <h3>{product.name}</h3>
-              <p>Price: ${product.price.toFixed(2)}</p>
-              {product.image_url && (
-                <img src={product.image_url} alt={product.name} style={{ maxWidth: '100px' }} />
-              )}
-            </Link>
-          ))}
+        {/* Wrap the product listing in a content div for spacing */}
+        <div className="shop-content">
+          <div className="product-list">
+            {products.map((product) => (
+              <Link to={`/shop/${product.id}`} key={product.id} className="product-card">
+                <h3>{product.name}</h3>
+                <p>Price: ${product.price.toFixed(2)}</p>
+                {product.image_url && (
+                  <img src={product.image_url} alt={product.name} style={{ maxWidth: '100px' }} />
+                )}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

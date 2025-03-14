@@ -2,13 +2,14 @@
 .home-container {
     position: relative;          /* so absolutely-positioned children can anchor here */
     width: 100vw;
-    height: 100vh;
-    background-color: #fdf5e6;   /* a light, daytime cream */
+    min-height: 100vh;
+    background-color: #eeeadf;   /* a light, daytime cream */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;     /* vertically center content if desired */
+    justify-content: flex-start; /* Changed from center to flex-start */
+    padding-top: 2rem;           /* Add top padding */
 }
   
 /* The background motif for daytime */
@@ -19,52 +20,112 @@
     opacity: 0.3;  /* make it semi-transparent */
     z-index: 0;    /* behind other elements */
 }
+
+/* Top content wrapper */
+.home-top-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    z-index: 1;
+}
   
 /* Headline above the cards */
 .home-container h1 {
     z-index: 1; /* on top of the motif */
-    margin-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     color: #333; /* or pick a brand-friendly color */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* First line of the heading */
+.welcome-line {
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Second line of the heading */
+.sanctuary-line {
+    font-size: 3rem;
+    font-weight: 700;
 }
   
 /* The cards container has a higher z-index to appear above .daytime-motif */
 .cards-container {
-    z-index: 1;
-    margin-top: 2rem;
-    width: 80%;
-    max-width: 1400px; /* or remove if you want it fully wide */
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
-    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    z-index: 1; /* on top of the motif */
+    position: relative;
 }
   
 /* The individual cards */
 .home-card {
-    background: rgba(255, 255, 255, 0.9); /* slightly translucent white background */
-    color: #333;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 250px;
     text-align: center;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 100%;
     text-decoration: none;
-    transition: transform 0.3s;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
   
 .home-card:hover {
-    transform: scale(1.03);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    color: white;
 }
   
 /* You can customize each card with brand colors, icons, or extra styling */
 .about-card {
-    /* e.g., a terracotta border or accent */
-    border: 2px solid #d56a47; 
+    background-color: #d56a47;
 }
+
 .shop-card {
-    /* e.g., a chartreuse border or accent */
-    border: 2px solid #adff2f;
+    background-color: #d56a47;
 }
+
 .community-card {
-    /* e.g., a navy or sage accent */
-    border: 2px solid #090c22;
+    background-color: #d56a47;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .home-container h1 {
+        margin-bottom: 1.5rem;
+    }
+    
+    .welcome-line {
+        font-size: 1.8rem;
+    }
+    
+    .sanctuary-line {
+        font-size: 2.4rem;
+    }
+    
+    .cards-container {
+        gap: 1rem;
+    }
+    
+    .home-card {
+        width: 100%;
+        max-width: 300px;
+    }
 }

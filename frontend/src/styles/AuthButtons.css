@@ -1,0 +1,63 @@
+.auth-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  z-index: 10;
+  position: relative;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 500px;
+  justify-content: center;
+}
+
+.auth-user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.auth-button {
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 20;
+}
+
+.login-button, .signup-button {
+  background-color: #d56a47; /* Terracotta color */
+  color: white;
+  min-width: 150px;
+}
+
+.login-button:hover, .signup-button:hover {
+  background-color: #c25539; /* Darker terracotta for hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button {
+  background-color: #d56a47; /* Matching terracotta color */
+  color: white;
+  min-width: 150px;
+}
+
+.logout-button:hover {
+  background-color: #c25539; /* Darker terracotta for hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+} 

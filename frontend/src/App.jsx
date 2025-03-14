@@ -1,7 +1,8 @@
 // frontend/src/App.jsx
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CartProvider } from './components/CartContext';
+import { AuthProvider } from './components/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import EntrancePage from './components/EntrancePage';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -11,31 +12,48 @@ import ProductDetail from './components/ProductDetail';
 import NavBar from './components/NavBar';
 import Cart from './components/Cart';
 import Footer from './components/Footer';
+import AdminDashboard from './components/AdminDashboard';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        {/* Optional Global Nav */}
-        <NavBar />
-
-        <Routes>
-          <Route path="/" element={<EntrancePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/:productId" element={<ProductDetail />} />
-          <Route path="/community" element={<CommunityPage />} />
-          {/* Add cart route if you want a dedicated page */}
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-
-        <Footer />
-      </BrowserRouter>
-    </CartProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <CartProvider>
+          <Routes>
+            {/* Root route - Entrance Page */}
+            <Route path="/" element={<EntrancePage />} />
+            
+            {/* All other routes with NavBar and Footer */}
+            <Route path="*" element={
+              <>
+                <NavBar />
+                <Routes>
+                  <Route path="/home" element={<HomePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/shop" element={<ShopPage />} />
+                  <Route path="/shop/:productId" element={<ProductDetail />} />
+                  <Route path="/community/*" element={<CommunityPage />} />
+                  <Route path="/cart" element={
+                    <ProtectedRoute>
+                      <Cart />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/admin" element={
+                    <ProtectedRoute requireAdmin={true}>
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  } />
+                </Routes>
+                <Footer />
+              </>
+            } />
+          </Routes>
+        </CartProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-

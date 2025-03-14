@@ -1,9 +1,47 @@
 // frontend/src/components/ProductDetail.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRequest } from '../services/api';
+import { apiService } from '../services/api';
 import { useCart } from './CartContext';
+import { useAuth } from './AuthContext';
+import { triggerLoginModal } from './ProtectedRoute';
 import '../styles/ProductDetail.css';
+
+// Define styles
+const styles = {
+  container: {
+    padding: '20px',
+    maxWidth: '800px',
+    margin: '0 auto'
+  },
+  heading: {
+    fontSize: '24px',
+    marginBottom: '20px'
+  },
+  image: {
+    maxWidth: '100%',
+    height: 'auto',
+    marginBottom: '20px'
+  },
+  price: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#333'
+  },
+  description: {
+    marginTop: '20px',
+    lineHeight: '1.6'
+  },
+  button: {
+    backgroundColor: '#9cd1ff',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginTop: '20px',
+    fontWeight: 'bold'
+  }
+};
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -11,9 +49,10 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    getRequest(`/products/${productId}`)
+    apiService.get(`/products/${productId}`)
       .then((data) => {
         setProduct(data);
         setLoading(false);
@@ -26,9 +65,17 @@ function ProductDetail() {
   }, [productId]);
 
   const handleAddToCart = () => {
+    // Check if user is authenticated
+    if (!isAuthenticated()) {
+      // Trigger login modal if not authenticated
+      triggerLoginModal();
+      return;
+    }
+
+    // Add to cart if authenticated
     if (product) {
-        addToCart({ ...product, quantity: 1 }); // Assuming quantity is 1 for simplicity
-        alert(`${product.name} has been added to your cart!`);
+      addToCart({ ...product, quantity: 1 }); // Assuming quantity is 1 for simplicity
+      alert(`${product.name} has been added to your cart!`);
     }
   };
 

@@ -2,37 +2,124 @@
 .community-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #fefaf0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #eeeadf;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    padding-top: 2rem;
+    box-sizing: border-box;
+    margin: 0;
+    left: 0;
+    right: 0;
+    max-width: 1200px;
+    margin: 0 auto;
 }
   
 .daytime-motif {
     position: absolute;
-    inset: 0;
-    background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
-    opacity: 0.25;
-    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, #e6f7ff, transparent);
+    z-index: -1;
+    border-radius: 8px 8px 0 0;
 }
   
-.community-container h1 {
-    z-index: 1;
+.community-top-content {
     text-align: center;
-    margin-top: 2rem; 
-    margin-bottom: 1rem;
+    padding: 40px 0;
+}
+  
+.community-top-content h1 {
+    font-size: 2.5rem;
     color: #333;
+    margin-bottom: 20px;
 }
   
 .community-content {
-    z-index: 1;
-    text-align: center;
-    max-width: 800px; 
-    width: 80%;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-    color: #333;
+    max-width: 700px;
+    margin: 0 auto;
     line-height: 1.6;
+}
+  
+.community-content p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Community sections on the main page */
+.community-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.community-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.community-section h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d56a47;
+}
+
+.community-section p {
+    margin-bottom: 20px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.section-link {
+    display: inline-block;
+    background-color: #d56a47;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.section-link:hover {
+    background-color: #c25539;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .community-container {
+        padding: 1rem;
+        padding-top: 1.5rem;
+    }
+    
+    .community-container h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .community-content {
+        width: 100%;
+        padding: 1.5rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
 }
