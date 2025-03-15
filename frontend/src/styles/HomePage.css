@@ -78,7 +78,7 @@
     width: 250px;
     text-align: center;
     text-decoration: none;
-    color: #333;
+    color: white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 }
@@ -86,7 +86,7 @@
 .home-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    color: white;
+    color: black;
 }
   
 /* You can customize each card with brand colors, icons, or extra styling */

@@ -13,7 +13,6 @@ function CommunityPage() {
         <h1>Community</h1>
         <div className="community-content">
           <p>Join our forum, read our blog, and check out upcoming events.</p>
-          <p>We value your thoughts and ideas—share them here!</p>
         </div>
       </div>
       
