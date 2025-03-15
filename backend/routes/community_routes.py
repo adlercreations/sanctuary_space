@@ -9,43 +9,6 @@ from sqlalchemy import desc, func
 community_bp = Blueprint('community_bp', __name__)
 
 # ------------------
-# BLOG
-# ------------------
-
-@community_bp.route('/blog', methods=['GET'])
-def get_blog_posts():
-    # For now, return a placeholder
-    data = [
-        {"id": 1, "title": "Welcome to Our Community", "content": "Hello world..."},
-        {"id": 2, "title": "Finding Peace", "content": "Some tips on meditation..."}
-    ]
-    return jsonify(data), 200
-
-@community_bp.route('/blog', methods=['POST'])
-@jwt_required()
-def create_blog_post():
-    try:
-        # Get current user
-        current_user_id = get_jwt_identity()
-        user = User.query.get(current_user_id)
-        
-        if not user or not user.is_admin:
-            return jsonify({"error": "Unauthorized - Admin access required"}), 403
-            
-        data = request.get_json()
-        title = data.get('title')
-        content = data.get('content')
-        
-        # Example if you had a BlogPost model:
-        # new_post = BlogPost(title=title, content=content, user_id=current_user_id)
-        # db.session.add(new_post)
-        # db.session.commit()
-
-        return jsonify({"message": "New blog post created"}), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# ------------------
 # EVENTS
 # ------------------
 

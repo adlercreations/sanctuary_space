@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 2rem;
-    padding-top: 2rem;
+    padding-top: 0rem;
     box-sizing: border-box;
     margin: 0;
     left: 0;
@@ -57,6 +57,7 @@
 .community-sections {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding-top: -2rem;
     gap: 30px;
     margin-top: 40px;
 }

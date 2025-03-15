@@ -6,6 +6,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0
 // Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -17,7 +18,6 @@ api.interceptors.request.use(
     const token = localStorage.getItem('access_token');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
-      console.log('Token added to request:', token);
     }
     return config;
   },
@@ -33,7 +33,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     
     // If the error is 401 and we haven't already tried to refresh the token
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       
       try {
@@ -48,7 +48,8 @@ api.interceptors.response.use(
         const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {}, {
           headers: {
             'Authorization': `Bearer ${refreshToken}`
-          }
+          },
+          withCredentials: true
         });
         
         // If successful, update the tokens
@@ -242,5 +243,12 @@ export const apiService = {
   get: (endpoint) => api.get(endpoint).then(response => response.data),
   post: (endpoint, data) => api.post(endpoint, data).then(response => response.data),
   put: (endpoint, data) => api.put(endpoint, data).then(response => response.data),
-  delete: (endpoint) => api.delete(endpoint).then(response => response.data)
+  delete: (endpoint) => api.delete(endpoint).then(response => response.data),
+  getCurrentUser: () => {
+    const userStr = localStorage.getItem('user');
+    return userStr ? JSON.parse(userStr) : null;
+  }
 };
+
+// Export the api instance as default
+export default api;

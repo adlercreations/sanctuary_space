@@ -430,6 +430,7 @@
   border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
+  background-color: #eeeadf;
   color: #2c3e50;
   box-sizing: border-box;
 }
@@ -494,4 +495,16 @@
 
 .auth-link:hover {
   text-decoration: underline;
+}
+
+.thread-form input,
+.thread-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: #eeeadf;
+  box-sizing: border-box;
 }

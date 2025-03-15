@@ -1,6 +1,7 @@
 // frontend/src/pages/CommunityPage.jsx
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import Forum from '../components/forum/Forum';
+import BlogPage from './BlogPage';
 import '../styles/CommunityPage.css';
 
 function CommunityPage() {
@@ -17,6 +18,7 @@ function CommunityPage() {
       
       <Routes>
         <Route path="/forum/*" element={<Forum />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route 
           path="/" 
           element={
@@ -30,7 +32,7 @@ function CommunityPage() {
               <div className="community-section">
                 <h2>Blog</h2>
                 <p>Read articles from our team and guest contributors about mindfulness and wellness.</p>
-                <a href="#" className="section-link">Read Blog</a>
+                <Link to="/community/blog" className="section-link">Read Blog</Link>
               </div>
               
               <div className="community-section">

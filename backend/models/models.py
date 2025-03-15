@@ -1,10 +1,8 @@
 # backend/models.py
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-
-db = SQLAlchemy()
+from . import db
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -21,6 +19,7 @@ class User(db.Model, UserMixin):
     forum_threads = db.relationship("ForumThread", backref="author", lazy=True)
     forum_comments = db.relationship("ForumComment", backref="author", lazy=True)
     forum_replies = db.relationship("ForumReply", backref="author", lazy=True)
+    blog_posts = db.relationship("BlogPost", backref="author", lazy=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -119,3 +118,28 @@ class ForumReply(db.Model):
     comment_id = db.Column(db.Integer, db.ForeignKey('forum_comments.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class BlogPost(db.Model):
+    __tablename__ = 'blog_posts'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    subject = db.Column(db.String(200), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'subject': self.subject,
+            'body': self.body,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            'author': {
+                'id': self.author.id,
+                'username': self.author.username
+            }
+        }

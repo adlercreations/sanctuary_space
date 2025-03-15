@@ -20,36 +20,40 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <Routes>
-            {/* Root route - Entrance Page */}
-            <Route path="/" element={<EntrancePage />} />
-            
-            {/* All other routes with NavBar and Footer */}
-            <Route path="*" element={
-              <>
-                <NavBar />
-                <Routes>
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/shop" element={<ShopPage />} />
-                  <Route path="/shop/:productId" element={<ProductDetail />} />
-                  <Route path="/community/*" element={<CommunityPage />} />
-                  <Route path="/cart" element={
-                    <ProtectedRoute>
-                      <Cart />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/admin" element={
-                    <ProtectedRoute requireAdmin={true}>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  } />
-                </Routes>
-                <Footer />
-              </>
-            } />
-          </Routes>
+          <div className="app">
+            <Routes>
+              {/* Root route - Entrance Page */}
+              <Route path="/" element={<EntrancePage />} />
+              
+              {/* All other routes with NavBar and Footer */}
+              <Route path="/*" element={
+                <>
+                  <NavBar />
+                  <main>
+                    <Routes>
+                      <Route path="home" element={<HomePage />} />
+                      <Route path="about" element={<AboutPage />} />
+                      <Route path="login" element={<LoginPage />} />
+                      <Route path="shop" element={<ShopPage />} />
+                      <Route path="shop/:productId" element={<ProductDetail />} />
+                      <Route path="community/*" element={<CommunityPage />} />
+                      <Route path="cart" element={
+                        <ProtectedRoute>
+                          <Cart />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="admin" element={
+                        <ProtectedRoute requireAdmin={true}>
+                          <AdminDashboard />
+                        </ProtectedRoute>
+                      } />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </>
+              } />
+            </Routes>
+          </div>
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>

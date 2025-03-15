@@ -5,7 +5,7 @@ from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from models import db, User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply
+from models import db, User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply, BlogPost
 from config import Config
 
 # Import your Blueprints
@@ -14,6 +14,7 @@ from routes.product_routes import product_bp
 from routes.community_routes import community_bp
 from routes.order_routes import order_bp
 from routes.admin_routes import admin_bp
+from routes.blog_routes import blog_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -23,17 +24,19 @@ app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY', 'your-secret-key
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 
-# Configure CORS before initializing the app
+# Configure CORS
 CORS(app, 
      resources={
-         r"/*": {  # All routes
-             "origins": ["http://localhost:5173"],  # Frontend URL
+         r"/api/*": {
+             "origins": ["http://localhost:5173"],
              "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
              "allow_headers": ["Content-Type", "Authorization"],
              "supports_credentials": True,
-             "expose_headers": ["Content-Range", "X-Content-Range"]
+             "expose_headers": ["Content-Type", "Authorization"],
+             "max_age": 3600
          }
-     })
+     },
+     supports_credentials=True)
 
 # Init DB
 db.init_app(app)
@@ -76,26 +79,17 @@ def missing_token_callback(error):
         'message': 'Missing Authorization Header'
     }), 401
 
-# Add CORS headers to all responses
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
-
 # Register Blueprints
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
 app.register_blueprint(product_bp, url_prefix='/api')
 app.register_blueprint(community_bp, url_prefix='/api/community')
 app.register_blueprint(order_bp, url_prefix='/api/orders')
 app.register_blueprint(admin_bp, url_prefix='/api/admin')
+app.register_blueprint(blog_bp, url_prefix='/api/community/blog')  # Move blog under community
 
-# Sample route
 @app.route('/')
 def home():
-    return "Sanctuary Space Backend Running!"
+    return jsonify({"message": "Welcome to Sanctuary Space API"})
 
 if __name__ == '__main__':
     with app.app_context():

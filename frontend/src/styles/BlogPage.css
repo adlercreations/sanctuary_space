@@ -1,0 +1,35 @@
+.blog-container {
+  padding: 2rem;
+  background-color: #eeeadf;
+}
+
+.blog-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.blog-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-post-button {
+  display: inline-block;
+  background-color: #d56a47;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.admin-actions {
+  margin-top: 1rem;
+}
+
+.edit-button, .delete-button {
+  margin-right: 10px;
+} 
