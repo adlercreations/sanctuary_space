@@ -102,6 +102,7 @@
 
 .section-link:hover {
     background-color: #c25539;
+    color: #333;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

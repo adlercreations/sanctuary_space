@@ -2,6 +2,7 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import Forum from '../components/forum/Forum';
 import BlogPage from './BlogPage';
+import EventsPage from './EventsPage';
 import '../styles/CommunityPage.css';
 
 function CommunityPage() {
@@ -19,6 +20,7 @@ function CommunityPage() {
       <Routes>
         <Route path="/forum/*" element={<Forum />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route 
           path="/" 
           element={
@@ -26,7 +28,7 @@ function CommunityPage() {
               <div className="community-section">
                 <h2>Forum</h2>
                 <p>Join discussions with other community members about wellness, self-care, and more.</p>
-                <a href="/community/forum" className="section-link">Visit Forum</a>
+                <Link to="/community/forum" className="section-link">Visit Forum</Link>
               </div>
               
               <div className="community-section">
@@ -38,7 +40,7 @@ function CommunityPage() {
               <div className="community-section">
                 <h2>Events</h2>
                 <p>Discover upcoming workshops, retreats, and community gatherings.</p>
-                <a href="#" className="section-link">View Events</a>
+                <Link to="/community/events" className="section-link">View Events</Link>
               </div>
             </div>
           } 

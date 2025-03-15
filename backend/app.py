@@ -5,7 +5,7 @@ from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from models import db, User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply, BlogPost
+from models import db, User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply, BlogPost, Event
 from config import Config
 
 # Import your Blueprints
@@ -15,6 +15,7 @@ from routes.community_routes import community_bp
 from routes.order_routes import order_bp
 from routes.admin_routes import admin_bp
 from routes.blog_routes import blog_bp
+from routes.event_routes import events
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -86,6 +87,7 @@ app.register_blueprint(community_bp, url_prefix='/api/community')
 app.register_blueprint(order_bp, url_prefix='/api/orders')
 app.register_blueprint(admin_bp, url_prefix='/api/admin')
 app.register_blueprint(blog_bp, url_prefix='/api/community/blog')  # Move blog under community
+app.register_blueprint(events, url_prefix='/api')  # Events routes already include /community/events prefix
 
 @app.route('/')
 def home():

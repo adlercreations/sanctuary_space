@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     forum_comments = db.relationship("ForumComment", backref="author", lazy=True)
     forum_replies = db.relationship("ForumReply", backref="author", lazy=True)
     blog_posts = db.relationship("BlogPost", backref="author", lazy=True)
+    events = db.relationship("Event", backref="author", lazy=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -136,6 +137,37 @@ class BlogPost(db.Model):
             'title': self.title,
             'subject': self.subject,
             'body': self.body,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            'author': {
+                'id': self.author.id,
+                'username': self.author.username
+            }
+        }
+
+class Event(db.Model):
+    __tablename__ = 'events'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    location = db.Column(db.String(200), nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'date': self.date.isoformat(),
+            'time': self.time.isoformat(),
+            'location': self.location,
+            'capacity': self.capacity,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             'author': {
