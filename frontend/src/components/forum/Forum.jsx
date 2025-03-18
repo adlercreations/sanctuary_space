@@ -23,6 +23,9 @@ function Forum() {
 
   return (
     <div className="forum-container">
+      {isModalOpen && (
+        <CreateThread onClose={() => setModalOpen(false)} />
+      )}
       <Routes>
         <Route
           path="/"
@@ -44,9 +47,6 @@ function Forum() {
         <Route path="/create" element={<CreateThread />} />
         <Route path="/threads/:threadId" element={<ThreadDetail />} />
       </Routes>
-      {isModalOpen && (
-        <CreateThread onClose={() => setModalOpen(false)} />
-      )}
     </div>
   );
 }
