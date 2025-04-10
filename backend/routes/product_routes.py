@@ -2,6 +2,7 @@
 from flask import Blueprint, jsonify, request
 from models import Product
 from models import db
+from flask_jwt_extended import jwt_required
 
 product_bp = Blueprint('product_bp', __name__)
 
@@ -46,3 +47,17 @@ def create_product():
     db.session.add(new_p)
     db.session.commit()
     return jsonify({"message": "Product created"}), 201
+
+@product_bp.route('/products/<int:product_id>', methods=['PATCH'])
+@jwt_required()
+def update_product(product_id):
+    product = Product.query.get(product_id)
+    if not product:
+        return jsonify({"error": "Product not found"}), 404
+
+    data = request.get_json()
+    if 'image_url' in data:
+        product.image_url = data['image_url']
+    
+    db.session.commit()
+    return jsonify({"message": "Product updated successfully", "product": product.to_dict()}), 200

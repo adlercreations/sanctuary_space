@@ -1,31 +1,47 @@
 import { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useAuth } from '../../components/AuthContext';
 import ThreadList from './ThreadList';
 import CreateThread from './CreateThread';
 import ThreadDetail from './ThreadDetail';
+import AuthModal from '../AuthModal';
 import '../../styles/Forum.css';
+import '../../styles/SharedStyles.css';
 
 function Forum() {
-  const { isAuthenticated, user } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isAuthModalOpen, setAuthModalOpen] = useState(false);
 
   const handleCreateThread = () => {
     if (isAuthenticated) {  
       setModalOpen(true);
     } else {
-      // Store the current location before redirecting
-      const currentPath = window.location.pathname;
-      navigate('/login', { state: { from: currentPath } });
+      // Show the auth modal instead of redirecting
+      setAuthModalOpen(true);
     }
+  };
+
+  const handleAuthRequired = () => {
+    setAuthModalOpen(true);
   };
 
   return (
     <div className="forum-container">
+      <div className="bottom-image" />
       {isModalOpen && (
-        <CreateThread onClose={() => setModalOpen(false)} />
+        <CreateThread 
+          onClose={() => setModalOpen(false)} 
+          onAuthRequired={handleAuthRequired}
+        />
       )}
+      
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setAuthModalOpen(false)} 
+        initialMode="login"
+      />
+      
       <Routes>
         <Route
           path="/"
@@ -44,8 +60,8 @@ function Forum() {
             </>
           }
         />
-        <Route path="/create" element={<CreateThread />} />
-        <Route path="/threads/:threadId" element={<ThreadDetail />} />
+        <Route path="/create" element={<CreateThread onClose={() => {}} onAuthRequired={handleAuthRequired} />} />
+        <Route path="/threads/:threadId" element={<ThreadDetail onAuthRequired={handleAuthRequired} />} />
       </Routes>
     </div>
   );

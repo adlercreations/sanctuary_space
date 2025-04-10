@@ -12,6 +12,33 @@
     padding-top: 2rem;           /* Add top padding */
 }
   
+/* The top-right image */
+.top-right-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 450px;  /* Increased from 250px */
+    height: 450px; /* Increased from 250px */
+    background: url('/assets/FoliageBorder_5.png') no-repeat center/contain;
+    transform: rotate(90deg); /* Rotate 90 degrees clockwise */
+    z-index: 1;    /* Above other background elements */
+    margin-top: -3rem; /* Ensures there's no space at the top */
+}
+
+/* The top-left image */
+.top-left-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 450px;
+    height: 450px;
+    background: url('/assets/FoliageBorder_4.png') no-repeat center/contain;
+    transform: rotate(180deg); /* Rotate 180 degrees */
+    z-index: 1;
+    margin-top: 0rem;
+    margin-left: -4rem; /* Ensure no margin on the left */
+}
+
 /* The background motif for daytime */
 .daytime-motif {
     position: absolute;
@@ -19,6 +46,20 @@
     background: url('/assets/daytime-jungle.svg') no-repeat center/cover;
     opacity: 0.3;  /* make it semi-transparent */
     z-index: 0;    /* behind other elements */
+}
+
+/* The arch background image */
+.arch-background {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1500px;  /* Increased from 1200px */
+    height: 1600px;      /* Increased from 500px */
+    background: url('/assets/Arch.svg') no-repeat center/contain;
+    opacity: 0.7;
+    z-index: 0;  /* behind other elements but above the daytime motif */
 }
 
 /* Top content wrapper */
@@ -64,7 +105,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    margin-top: 1rem;
+    margin-top: 4rem;
     margin-bottom: 2rem;
     z-index: 1; /* on top of the motif */
     position: relative;
@@ -128,4 +169,14 @@
         width: 100%;
         max-width: 300px;
     }
+    
+    .arch-background {
+        height: 400px;  /* Increased from 300px */
+    }
+}
+
+.title-image {
+    width: 600px;  /* Set the desired width */
+    height: auto;  /* Maintain aspect ratio */
+    margin: 3rem 0 -2rem 1rem; /* Center the image if needed */
 }

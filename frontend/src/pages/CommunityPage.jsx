@@ -4,11 +4,13 @@ import Forum from '../components/forum/Forum';
 import BlogPage from './BlogPage';
 import EventsPage from './EventsPage';
 import '../styles/CommunityPage.css';
+import '../styles/SharedStyles.css';
 
 function CommunityPage() {
   return (
     <div className="community-container">
       <div className="daytime-motif" />
+      <div className="bottom-image" />
       <div className="community-top-content">
         <h1>Community</h1>
         <div className="community-content">

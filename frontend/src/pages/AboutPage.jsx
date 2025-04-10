@@ -1,11 +1,13 @@
 // frontend/src/pages/AboutPage.jsx
 import React from 'react';
 import '../styles/AboutPage.css';
+import '../styles/SharedStyles.css';
 
 function AboutPage() {
   return (
     <div className="about-container">
       <div className="daytime-motif" />
+      <div className="bottom-image" />
       <h1>About Sanctuary Space</h1>
       <div className="about-content">
         <p>

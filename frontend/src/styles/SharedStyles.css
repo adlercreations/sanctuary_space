@@ -1,0 +1,14 @@
+/* Shared bottom foliage border for all pages except entrance */
+.bottom-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw; /* Full width of the viewport */
+    height: 600px; /* Increased height to show more of the image */
+    background: url('/assets/FoliageBorder_1.png') no-repeat center bottom/cover;
+    transform: rotate(180deg);
+    z-index: 0; /* Changed from 1 to 0 so it stays behind content */
+    margin-bottom: 0; /* Ensure no margin on the bottom */
+    background-position: center -30px; /* Adjust the vertical position of the background image */
+    pointer-events: none; /* Ensures clicks pass through the image to elements beneath */
+}

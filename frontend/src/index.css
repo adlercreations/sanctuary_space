@@ -1,3 +1,13 @@
+/* Add this at the top of the file */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../public/assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+       url('../public/assets/fonts/Montserrat-Regular.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap; /* This ensures text remains visible during font loading */
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,6 +39,10 @@ body {
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
+}
+
+h1, h2 ,p {
+  font-family: 'Montserrat', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {

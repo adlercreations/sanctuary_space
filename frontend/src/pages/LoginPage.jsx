@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
 import '../styles/AuthPages.css';
+import '../styles/SharedStyles.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -35,6 +36,7 @@ const LoginPage = () => {
 
   return (
     <div className="auth-container">
+      <div className="bottom-image" />
       <div className="auth-card">
         <h2>Login to Sanctuary Space</h2>
         

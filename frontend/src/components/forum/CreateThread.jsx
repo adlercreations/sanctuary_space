@@ -1,17 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../components/AuthContext';
 import { createThread } from '../../services/forumService';
+import PropTypes from 'prop-types';
 import '../../styles/Forum.css';
 
-function CreateThread({ onClose }) {
+function CreateThread({ onClose, onAuthRequired }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!isAuthenticated) {
+      onAuthRequired();
+      return;
+    }
     
     if (!title.trim() || !content.trim()) {
       setError('Please provide both a title and content for your thread.');
@@ -29,8 +37,8 @@ function CreateThread({ onClose }) {
       onClose(); // Close the modal after successful creation
     } catch (err) {
       console.error('Error creating thread:', err);
-      if (err.response && err.response.status === 401) {
-        setError('You must be logged in to create a thread.');
+      if (err.message === 'User not authenticated') {
+        onAuthRequired();
       } else {
         setError('Failed to create thread. Please try again later.');
       }
@@ -90,5 +98,10 @@ function CreateThread({ onClose }) {
     </div>
   );
 }
+
+CreateThread.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  onAuthRequired: PropTypes.func.isRequired
+};
 
 export default CreateThread; 

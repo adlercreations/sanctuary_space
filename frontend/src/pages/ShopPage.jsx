@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiService } from '../services/api';
 import '../styles/ShopPage.css';
+import '../styles/SharedStyles.css';
 
 function ShopPage() {
   const [products, setProducts] = useState([]);
@@ -28,6 +29,7 @@ function ShopPage() {
   return (
     <div className="shop-container">
       <div className="daytime-motif" />
+      <div className="bottom-image" />
       
       <div className="shop-top-content">
         <h1>Wellness Teas & Marketplace</h1>
@@ -37,11 +39,11 @@ function ShopPage() {
           <div className="product-list">
             {products.map((product) => (
               <Link to={`/shop/${product.id}`} key={product.id} className="product-card">
-                <h3>{product.name}</h3>
-                <p>Price: ${product.price.toFixed(2)}</p>
-                {product.image_url && (
-                  <img src={product.image_url} alt={product.name} style={{ maxWidth: '100px' }} />
-                )}
+                <img src={product.image_url} alt={product.name} />
+                <div className="text-content">
+                  <h3>{product.name}</h3>
+                  <p className="price">Price: ${product.price.toFixed(2)}</p>
+                </div>
               </Link>
             ))}
           </div>

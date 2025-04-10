@@ -1,6 +1,7 @@
 // frontend/src/components/Cart.jsx
 import { useState } from 'react';
 import '../styles/Cart.css';
+import '../styles/SharedStyles.css';
 
 function Cart() {
   // eslint-disable-next-line no-unused-vars
@@ -9,6 +10,7 @@ function Cart() {
   return (
     <div className="cart-container">
       <div className="daytime-motif" />
+      <div className="bottom-image" />
       <h2>Your Shopping Cart</h2>
       
       <div className="cart-content">

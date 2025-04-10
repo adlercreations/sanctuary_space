@@ -11,12 +11,13 @@ function HomePage() {
   return (
     <div className="home-container">
       <div className="daytime-motif" />
+      <div className="arch-background" />
+      <div className="top-right-image" />
+      <div className="top-left-image" />
+      <div className="bottom-image" />
       
       <div className="home-top-content">
-        <h1>
-          <span className="welcome-line">Welcome to</span>
-          <span className="sanctuary-line">Sanctuary Space</span>
-        </h1>
+        <img src="/assets/Title.svg" alt="Sanctuary Space Title" className="title-image" />
         
         <div className="cards-container">
           <Link to="/about" className="home-card about-card">

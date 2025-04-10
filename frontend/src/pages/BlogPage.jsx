@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../components/AuthContext';
 import api from '../services/api';
 import '../styles/Blog.css';
+import '../styles/SharedStyles.css';
 
 const BlogPage = () => {
     const [posts, setPosts] = useState([]);
@@ -67,6 +68,7 @@ const BlogPage = () => {
 
     return (
         <div className="blog-container">
+            <div className="bottom-image" />
             <h1>Sanctuary Space Blog</h1>
             
             {currentUser && currentUser.is_admin && (
