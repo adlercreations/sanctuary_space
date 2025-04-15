@@ -141,6 +141,7 @@ def create_payment_intent():
         intent = stripe.PaymentIntent.create(
             amount=int(amount * 100),  # Stripe expects amounts in cents
             currency='usd',
+            payment_method_types=['card', 'cashapp', 'afterpay_clearpay'],
             metadata={'order_id': order.id}
         )
 

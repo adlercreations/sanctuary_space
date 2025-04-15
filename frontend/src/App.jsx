@@ -14,7 +14,7 @@ import Cart from './components/Cart';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
 import LoginPage from './pages/LoginPage';
-import Checkout from './components/Checkout';
+import CheckoutWrapper from './components/CheckoutWrapper';
 import OrderConfirmation from './pages/OrderConfirmation';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -61,15 +61,9 @@ function App() {
                             </ProtectedRoute>
                           }
                         />
-                        <Route
-                          path="checkout"
-                          element={
-                            <Elements stripe={stripePromise}>
-                              <Checkout />
-                            </Elements>
-                          }
-                        />
-                        {/* New Order Confirmation route */}
+                        {/* Updated Checkout route using CheckoutWrapper */}
+                        <Route path="checkout" element={<CheckoutWrapper />} />
+                        {/* Order Confirmation route */}
                         <Route path="order-confirmation" element={<OrderConfirmation />} />
                       </Routes>
                     </main>
