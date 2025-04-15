@@ -1,7 +1,7 @@
 # backend/models.py
 from flask_login import UserMixin
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+import bcrypt
 from . import db
 
 class User(db.Model, UserMixin):
@@ -23,10 +23,13 @@ class User(db.Model, UserMixin):
     events = db.relationship("Event", backref="author", lazy=True)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        # Generate a salt and hash the password
+        salt = bcrypt.gensalt()
+        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        # Check if the provided password matches the stored hash
+        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 
     @property
     def is_active(self):
@@ -63,8 +66,21 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    stripe_payment_intent_id = db.Column(db.String(255), unique=True, nullable=True)
+    payment_status = db.Column(db.String(50), default='pending')  # pending, succeeded, failed
+    total_amount = db.Column(db.Float, nullable=False, default=0.0)
 
     items = db.relationship("OrderItem", backref="order", lazy=True)
+
+    def calculate_total(self):
+        """Calculate total amount for the order"""
+        total = 0
+        for item in self.items:
+            product = Product.query.get(item.product_id)
+            if product:
+                total += product.price * item.quantity
+        self.total_amount = total
+        return total
 
 class OrderItem(db.Model):
     __tablename__ = 'order_items'

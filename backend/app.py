@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from models import db, User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply, BlogPost, Event
 from config import Config
+from dotenv import load_dotenv
 
 # Import your Blueprints
 from routes.auth_routes import auth_bp, token_blocklist
@@ -19,6 +20,9 @@ from routes.event_routes import events
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+# Load environment variables from .env file
+load_dotenv()
 
 # JWT Configuration
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY', 'your-secret-key')  # Change in production
@@ -79,6 +83,9 @@ def missing_token_callback(error):
         'sub_status': 42,
         'message': 'Missing Authorization Header'
     }), 401
+
+print("Stripe Secret Key:", Config.STRIPE_SECRET_KEY)
+print("Stripe Publishable Key:", Config.STRIPE_PUBLISHABLE_KEY)
 
 # Register Blueprints
 app.register_blueprint(auth_bp, url_prefix='/api/auth')

@@ -4,7 +4,7 @@
     width: 100vw;       /* Fill entire viewport width */
     height: 100vh;      /* Fill entire viewport height */
     overflow: hidden;
-    background-color: #eeeadf; /* a light daytime cream */
+    background-color: #ffffff; /* a light daytime cream */
     display: flex;
     flex-direction: column;
     align-items: center;

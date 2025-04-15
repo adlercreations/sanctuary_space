@@ -1,3 +1,4 @@
+// frontend/src/components/AuthContext.jsx
 import { createContext, useState, useEffect, useContext } from 'react';
 import { authService } from '../services/api';
 import { useNavigate, useLocation } from 'react-router-dom';

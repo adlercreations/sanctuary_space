@@ -7,42 +7,6 @@ import { useAuth } from './AuthContext';
 import { triggerLoginModal } from './ProtectedRoute';
 import '../styles/ProductDetail.css';
 
-// Define styles
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '800px',
-    margin: '0 auto'
-  },
-  heading: {
-    fontSize: '24px',
-    marginBottom: '20px'
-  },
-  image: {
-    maxWidth: '100%',
-    height: 'auto',
-    marginBottom: '20px'
-  },
-  price: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: '#333'
-  },
-  description: {
-    marginTop: '20px',
-    lineHeight: '1.6'
-  },
-  button: {
-    backgroundColor: '#9cd1ff',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginTop: '20px',
-    fontWeight: 'bold'
-  }
-};
-
 function ProductDetail() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -50,6 +14,7 @@ function ProductDetail() {
   const [error, setError] = useState(null);
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     apiService.get(`/products/${productId}`)
@@ -65,17 +30,21 @@ function ProductDetail() {
   }, [productId]);
 
   const handleAddToCart = () => {
-    // Check if user is authenticated
     if (!isAuthenticated()) {
-      // Trigger login modal if not authenticated
       triggerLoginModal();
       return;
     }
 
-    // Add to cart if authenticated
     if (product) {
-      addToCart({ ...product, quantity: 1 }); // Assuming quantity is 1 for simplicity
-      alert(`${product.name} has been added to your cart!`);
+      addToCart({ ...product, quantity });
+      alert(`${quantity} ${quantity === 1 ? 'item' : 'items'} of ${product.name} ${quantity === 1 ? 'has' : 'have'} been added to your cart!`);
+    }
+  };
+
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value > 0) {
+      setQuantity(value);
     }
   };
 
@@ -84,20 +53,33 @@ function ProductDetail() {
   if (!product) return <p>No product found</p>;
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>{product.name}</h2>
+    <div className="container">
+      <h2 className="heading">{product.name}</h2>
       {product.image_url && (
         <img 
-            src={product.image_url} 
-            alt={product.name} 
-            style={styles.image} 
+          src={product.image_url} 
+          alt={product.name} 
+          className="image" 
         />
       )}
-      <p style={styles.price}>Price: ${product.price.toFixed(2)}</p>
+      <p className="price">Price: ${product.price.toFixed(2)}</p>
       {product.description && (
-        <p style={styles.description}>{product.description}</p>
+        <p className="description">{product.description}</p>
       )}
-      <button onClick={handleAddToCart} style={styles.button}>
+      
+      <div className="quantity-container">
+        <label htmlFor="quantity" className="quantity-label">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          min="1"
+          value={quantity}
+          onChange={handleQuantityChange}
+          className="quantity-input"
+        />
+      </div>
+
+      <button onClick={handleAddToCart} className="button">
         Add to Cart
       </button>
     </div>

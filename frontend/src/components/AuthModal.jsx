@@ -1,3 +1,4 @@
+// frontend/src/components/AuthModal.jsx
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';

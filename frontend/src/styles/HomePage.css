@@ -3,7 +3,7 @@
     position: relative;          /* so absolutely-positioned children can anchor here */
     width: 100vw;
     min-height: 100vh;
-    background-color: #eeeadf;   /* a light, daytime cream */
+    background-color: #ffffff;   /* a light, daytime cream */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -132,15 +132,52 @@
   
 /* You can customize each card with brand colors, icons, or extra styling */
 .about-card {
-    background-color: #d56a47;
+    background-color: #c1826a;
+}
+
+.about-card h2 {
+    color: white;
+}
+    
+
+.about-card:hover {
+    background-color: #c25539;
+}
+
+.about-card:hover h2 {
+    color: black;
 }
 
 .shop-card {
-    background-color: #d56a47;
+    background-color: #c1826a;
+}
+
+.shop-card h2 {
+    color: white;
+}
+
+.shop-card:hover {
+    background-color: #c25539;
+}
+
+.shop-card:hover h2 {
+    color: black;
 }
 
 .community-card {
-    background-color: #d56a47;
+    background-color: #c1826a;
+}
+
+.community-card h2 {
+    color: white;
+}
+
+.community-card:hover {
+    background-color: #c25539;
+}
+
+.community-card:hover h2 {
+    color: black;
 }
 
 /* Media queries for responsiveness */
@@ -178,5 +215,5 @@
 .title-image {
     width: 600px;  /* Set the desired width */
     height: auto;  /* Maintain aspect ratio */
-    margin: 3rem 0 -2rem 1rem; /* Center the image if needed */
+    margin: 3rem 0 -2rem 0rem; /* Center the image if needed */
 }

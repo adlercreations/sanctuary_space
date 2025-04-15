@@ -1,3 +1,4 @@
+// frontend/src/components/forum/ThreadDetail.jsx
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getThread, addComment, addReply } from '../../services/forumService';

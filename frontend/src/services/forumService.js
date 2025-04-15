@@ -1,3 +1,4 @@
+// frontend/src/services/forumService.js
 import axios from 'axios';
 import { authService, API_BASE_URL } from './api';
 

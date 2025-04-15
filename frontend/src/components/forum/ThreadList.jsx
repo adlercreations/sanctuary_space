@@ -1,3 +1,4 @@
+// frontend/src/components/forum/ThreadList.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getThreads } from '../../services/forumService';

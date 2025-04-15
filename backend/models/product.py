@@ -1,3 +1,4 @@
+# backend/models/product.py
 from . import db
 
 class Product(db.Model):

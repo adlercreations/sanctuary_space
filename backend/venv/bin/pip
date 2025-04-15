@@ -1,4 +1,4 @@
-#!/Users/stephenhome/Development/code/other-projects/sanctuary-space/backend/venv/bin/python3.13
+#!/Users/stephenhome/Development/code/other-projects/sanctuary-space/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

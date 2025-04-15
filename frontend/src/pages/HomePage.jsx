@@ -12,8 +12,8 @@ function HomePage() {
     <div className="home-container">
       <div className="daytime-motif" />
       <div className="arch-background" />
-      <div className="top-right-image" />
-      <div className="top-left-image" />
+      {/* <div className="top-right-image" />
+      <div className="top-left-image" /> */}
       <div className="bottom-image" />
       
       <div className="home-top-content">

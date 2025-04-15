@@ -1,8 +1,8 @@
 /* Add this at the top of the file */
 @font-face {
   font-family: 'Montserrat';
-  src: url('../public/assets/fonts/Montserrat-Regular.woff2') format('woff2'),
-       url('../public/assets/fonts/Montserrat-Regular.woff') format('woff');
+  src: url('../assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+       url('../assets/fonts/Montserrat-Regular.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap; /* This ensures text remains visible during font loading */

@@ -1,3 +1,4 @@
+# backend/models/blog.py
 from . import db
 from datetime import datetime
 

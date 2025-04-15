@@ -1,3 +1,4 @@
+// frontend/src/pages/BlogPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../components/AuthContext';
 import api from '../services/api';

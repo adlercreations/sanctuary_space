@@ -5,7 +5,6 @@ from flask_jwt_extended import (
     jwt_required, get_jwt_identity, get_jwt
 )
 from models import db, User
-from werkzeug.security import generate_password_hash
 from datetime import datetime, timezone
 
 auth_bp = Blueprint('auth_bp', __name__)
@@ -30,8 +29,9 @@ def signup():
         new_user = User(username=username, email=email)
         new_user.set_password(password)
         
-        # Set admin status for specific email
-        if email == 'allmighty724@gmail.com':
+        # Set admin status for specific emails
+        ADMIN_EMAILS = ['allmighty724@gmail.com', 'sanctuaryspacebusiness@gmail.com']  # Replace with your new email
+        if email in ADMIN_EMAILS:
             new_user.is_admin = True
             
         db.session.add(new_user)

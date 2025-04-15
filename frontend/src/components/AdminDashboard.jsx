@@ -1,3 +1,4 @@
+// frontend/src/components/AdminDashboard.jsx
 import { useState, useEffect } from 'react';
 import { adminService } from '../services/api';
 import '../styles/AdminDashboard.css';

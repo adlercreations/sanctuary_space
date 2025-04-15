@@ -1,3 +1,4 @@
+// frontend/src/components/forum/Forum.jsx
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useAuth } from '../../components/AuthContext';

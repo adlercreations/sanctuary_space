@@ -11,4 +11,5 @@
     margin-bottom: 0; /* Ensure no margin on the bottom */
     background-position: center -30px; /* Adjust the vertical position of the background image */
     pointer-events: none; /* Ensures clicks pass through the image to elements beneath */
+    filter: saturate(2) brightness(0.95);
 }
