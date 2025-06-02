@@ -105,9 +105,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
+    align-items: center;
+    gap: 1rem;
+    width: 1000px; /* Accommodates 3 cards of 250px width plus gaps */
+    margin: 4rem auto 2rem auto;
     z-index: 1; /* on top of the motif */
     position: relative;
 }
