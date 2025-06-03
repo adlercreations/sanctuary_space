@@ -17,6 +17,7 @@ from routes.order_routes import order_bp
 from routes.admin_routes import admin_bp
 from routes.blog_routes import blog_bp
 from routes.event_routes import events
+from routes.mood_board_routes import mood_board_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -36,12 +37,11 @@ CORS(app,
              "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
              "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
              "allow_headers": ["Content-Type", "Authorization"],
-             "supports_credentials": True,
              "expose_headers": ["Content-Type", "Authorization"],
+             "supports_credentials": True,
              "max_age": 3600
          }
-     },
-     supports_credentials=True)
+     })
 
 # Init DB
 db.init_app(app)
@@ -89,6 +89,7 @@ app.register_blueprint(order_bp, url_prefix='/api/orders')
 app.register_blueprint(admin_bp, url_prefix='/api/admin')
 app.register_blueprint(blog_bp, url_prefix='/api/community/blog')  # Move blog under community
 app.register_blueprint(events, url_prefix='/api')  # Events routes already include /community/events prefix
+app.register_blueprint(mood_board_bp, url_prefix='/api/mood-board')
 
 @app.route('/')
 def home():

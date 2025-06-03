@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/SharedStyles.css';
 import '../styles/GardenStyles.css';
+import '../styles/TeaClubPage.css';
 
 function TeaClubPage() {
   return (

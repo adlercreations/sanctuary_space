@@ -1,17 +1,17 @@
 .mood-board-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem 0;
-  width: 100%;
 }
 
 .mood-board-item {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  aspect-ratio: 1; /* Make containers square */
 }
 
 .mood-board-item:hover {
@@ -20,56 +20,93 @@
 
 .mood-board-item img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-}
-
-.mood-board-item .caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0.5rem;
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.add-image-form {
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.add-image-form input {
-  flex: 1;
-  min-width: 200px;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.add-image-form button,
-.delete-image-btn {
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  display: block;
 }
 
 .delete-image-btn {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  background-color: rgba(255, 0, 0, 0.8);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #d56a47;
+  transition: all 0.2s ease;
 }
 
-.add-image-form button:hover,
 .delete-image-btn:hover {
-  background-color: var(--primary-color-dark);
+  background: #d56a47;
+  color: white;
+}
+
+.add-image-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.add-image-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.add-image-form button {
+  padding: 0.75rem 1.5rem;
+  background: #d56a47;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.add-image-form button:hover {
+  background: #c2553f;
+}
+
+.error-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #ffe6e6;
+  border: 1px solid #ffcccc;
+  border-radius: 4px;
+  color: #cc0000;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Empty state */
+.mood-board-grid p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.mood-board-item .caption {
+  padding: 1rem;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
 }

@@ -26,6 +26,10 @@ function ShopPage() {
   if (loading) return <p>Loading products...</p>;
   if (error)   return <p>{error}</p>;
 
+  // For now, let's assume the first two products are Enhanced Teas
+  const enhancedTeas = products.slice(0, 2); // Adjust this logic as needed
+  const wellnessTeas = []; // No products yet
+
   return (
     <div className="shop-container">
       <div className="daytime-motif" />
@@ -34,9 +38,10 @@ function ShopPage() {
       <div className="shop-top-content">
         <h1>Wellness Teas & Marketplace</h1>
 
-        {/* Simplified structure */}
+        {/* Enhanced Teas Section */}
+        <h2>Enhanced Teas</h2>
         <div className="shop-content">
-          {products.map((product) => (
+          {enhancedTeas.map((product) => (
             <Link to={`/shop/${product.id}`} key={product.id} className="product-card">
               <img src={product.image_url} alt={product.name} />
               <div className="text-content">
@@ -45,6 +50,15 @@ function ShopPage() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Wellness Teas Section */}
+        <h2>Wellness Teas</h2>
+        <div className="shop-content">
+          {/* Empty for now */}
+          {wellnessTeas.length === 0 && (
+            <p style={{ opacity: 0.6, fontStyle: 'italic' }}>Coming soon!</p>
+          )}
         </div>
       </div>
     </div>
