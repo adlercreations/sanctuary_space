@@ -40,9 +40,9 @@ function HomePage() {
             <p>Join our exclusive tea tasting community</p>
           </Link>
 
-          <Link to="/garden-parties" className="home-card garden-parties-card">
-            <h2>Garden Parties</h2>
-            <p>Experience our seasonal garden gatherings</p>
+          <Link to="/events" className="home-card events-card">
+            <h2>Events</h2>
+            <p>Discover our special gatherings and experiences</p>
           </Link>
 
           <Link to="/mood-board" className="home-card mood-board-card">

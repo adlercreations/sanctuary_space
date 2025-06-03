@@ -20,6 +20,8 @@ import TeaClubPage from './pages/TeaClubPage';
 import GardenPartiesPage from './pages/GardenPartiesPage';
 import GardenPartyDetail from './components/GardenPartyDetail';
 import MoodBoardPage from './pages/MoodBoardPage';
+import EventsPage from './pages/EventsPage';
+import DinnerClubPage from './pages/DinnerClubPage';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -50,8 +52,11 @@ function App() {
                         <Route path="shop/:productId" element={<ProductDetail />} />
                         <Route path="community/*" element={<CommunityPage />} />
                         <Route path="tea-club" element={<TeaClubPage />} />
-                        <Route path="garden-parties" element={<GardenPartiesPage />} />
-                        <Route path="garden-parties/:id" element={<GardenPartyDetail />} />
+                        <Route path="events" element={<EventsPage />} />
+                        <Route path="events/garden-parties" element={<GardenPartiesPage />} />
+                        <Route path="events/dinner-club" element={<DinnerClubPage />} />
+                        <Route path="events/tea-club" element={<TeaClubPage />} />
+                        <Route path="events/garden-parties/:id" element={<GardenPartyDetail />} />
                         <Route path="mood-board" element={<MoodBoardPage />} />
                         <Route
                           path="cart"

@@ -234,19 +234,19 @@
     color: black;
 }
 
-.garden-parties-card {
+.events-card {
     background-color: #c1826a;
 }
 
-.garden-parties-card h2 {
+.events-card h2 {
     color: white;
 }
 
-.garden-parties-card:hover {
+.events-card:hover {
     background-color: rgb(196, 88, 45);
 }
 
-.garden-parties-card:hover h2 {
+.events-card:hover h2 {
     color: black;
 }
 
