@@ -61,4 +61,5 @@ htmlcov/
 # Misc
 *.log
 .DS_Store
-*.sqlite3
+*.sqlite3*.pyc
+__pycache__/
