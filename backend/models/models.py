@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from datetime import datetime
 import bcrypt
 from . import db
+from .product import Product
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'

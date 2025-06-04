@@ -51,7 +51,7 @@
 }
 
 .form-group input:focus {
-  border-color: #9cd1ff;
+  border-color: #DFFF00;
   outline: none;
   box-shadow: 0 0 0 2px rgba(156, 209, 255, 0.3);
 }
@@ -70,7 +70,7 @@
 }
 
 .auth-button:hover {
-  background-color: #8bc0f0;
+  background-color: #DFFF00;
 }
 
 .auth-button:disabled {

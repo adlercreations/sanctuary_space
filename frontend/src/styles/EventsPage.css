@@ -56,8 +56,8 @@
   font-size: 1.2rem;
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  background-color: #f2ffa0;
-  color: black;
+  background-color: #d56a47;
+  color: white;
   text-decoration: none;
   border-radius: 25px;
   transition: background-color 0.2s ease;
@@ -65,22 +65,23 @@
 
 .event-link:hover {
   background-color: #DFFF00;
+  color: #000;
 }
 
 .event-section {
-  background-color: #c1826a;
+  background-color: #eeeadf;
 }
 
 .event-section h2 {
-  color: white;
+  color: #d56a47;
 }
 
 .event-section p {
-  color: white;
+  color: black;
 }
 
 .event-section:hover {
-  background-color: rgb(196, 88, 45);
+  background-color: #dedace;
 }
 
 .event-section:hover h2 {
