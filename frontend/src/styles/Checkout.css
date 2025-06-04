@@ -28,7 +28,7 @@ li {
 }
   
 button {
-    background-color: #0e3f6b; /* Match primary color */
+    background-color: #bebebe; /* Match primary color */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -38,7 +38,7 @@ button {
 }
   
 button:hover {
-    background-color: #0c2e4b; /* Darker shade for hover effect */
+    background-color: #d5d5d5; /* Darker shade for hover effect */
 }
 
 /* Stripe Card Element styles */
@@ -60,4 +60,120 @@ button:hover {
 
 .StripeElement--webkit-autofill {
     background-color: #f9f9f9 !important; /* Ensure autofill background matches */
+}
+
+/* Tab Styles */
+.delivery-options-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1em;
+  color: #555;
+  border-bottom: 3px solid transparent; /* For active state indicator */
+  margin-right: 5px; /* Spacing between tabs */
+}
+
+.tab-button.active {
+  color: #007bff; /* Or your primary color */
+  border-bottom-color: #007bff; /* Or your primary color */
+  font-weight: bold;
+}
+
+.tab-button:hover {
+  color: #0056b3;
+}
+
+/* Address Form Styles */
+.address-form {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.address-form h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.address-form input[type="text"] {
+  width: calc(100% - 22px); /* Account for padding and border */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.address-form input[type="text"]:last-child {
+  margin-bottom: 0;
+}
+
+.address-form p {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.payment-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.payment-section h4 {
+  margin-bottom: 15px;
+}
+
+/* Ensure button styling is consistent */
+.checkout-container button[type="submit"] {
+  background-color: #28a745; /* Green for pay button, or your brand's primary action color */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  width: 100%;
+  margin-top: 10px; /* Spacing above the pay button */
+}
+
+.checkout-container button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.checkout-container button[type="submit"]:hover:not(:disabled) {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 600px) {
+  .delivery-options-tabs {
+    flex-direction: column;
+  }
+  .tab-button {
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+  }
+  .tab-button.active {
+    border-bottom-color: #007bff;
+    border-left: 3px solid #007bff; /* Indicate active tab differently on small screens */
+    border-bottom-width: 1px; /* Reset bottom border for stacked tabs */
+
+  }
+  .address-form input[type="text"] {
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
 }

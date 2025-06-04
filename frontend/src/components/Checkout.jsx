@@ -1,5 +1,5 @@
 // frontend/src/components/Checkout.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
@@ -9,6 +9,10 @@ import '../styles/SharedStyles.css';
 function Checkout() {
   const { cartItems } = useCart();
   const navigate = useNavigate();
+  const [deliveryOption, setDeliveryOption] = useState('mail'); // 'mail' or 'local'
+  const [mailingAddress, setMailingAddress] = useState({ street: '', city: '', state: '', zip: '' });
+  const [localAddress, setLocalAddress] = useState({ street: '', apt: '' });
+  // TODO: Add state for delivery fee and update total
 
   const stripe = useStripe();
   const elements = useElements();
@@ -36,10 +40,41 @@ function Checkout() {
     // If payment succeeds, Stripe will handle the redirection.
   };
 
-  // You can still show a summary of cart items if desired.
+  const handleInputChange = (e, formType) => {
+    const { name, value } = e.target;
+    if (formType === 'mail') {
+      setMailingAddress(prev => ({ ...prev, [name]: value }));
+    } else if (formType === 'local') {
+      setLocalAddress(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  // TODO: Calculate total price including delivery fee
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const deliveryFee = 5.00; // Example delivery fee
+  const finalTotal = totalPrice + (cartItems.length > 0 ? deliveryFee : 0);
+
   return (
     <form onSubmit={handleSubmit} className="checkout-container">
       <h2>Checkout</h2>
+
+      <div className="delivery-options-tabs">
+        <button 
+          type="button" 
+          className={`tab-button ${deliveryOption === 'mail' ? 'active' : ''}`}
+          onClick={() => setDeliveryOption('mail')}
+        >
+          Mail Delivery
+        </button>
+        <button 
+          type="button" 
+          className={`tab-button ${deliveryOption === 'local' ? 'active' : ''}`}
+          onClick={() => setDeliveryOption('local')}
+        >
+          Local Delivery
+        </button>
+      </div>
+
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -52,9 +87,37 @@ function Checkout() {
               </li>
             ))}
           </ul>
-          {/* Render the PaymentElement; the clientSecret and appearance are provided by the Elements provider */}
-          <PaymentElement />
-          <button type="submit">Pay Now</button>
+          <p>Subtotal: ${totalPrice.toFixed(2)}</p>
+          <p>Delivery Fee: ${deliveryFee.toFixed(2)}</p>
+          <h4>Total: ${finalTotal.toFixed(2)}</h4>
+
+          {deliveryOption === 'mail' && (
+            <div className="address-form mail-delivery-form">
+              <h4>Mailing Address</h4>
+              <input type="text" name="street" placeholder="Street Address" value={mailingAddress.street} onChange={(e) => handleInputChange(e, 'mail')} required />
+              <input type="text" name="city" placeholder="City" value={mailingAddress.city} onChange={(e) => handleInputChange(e, 'mail')} required />
+              <input type="text" name="state" placeholder="State" value={mailingAddress.state} onChange={(e) => handleInputChange(e, 'mail')} required />
+              <input type="text" name="zip" placeholder="Zip Code" value={mailingAddress.zip} onChange={(e) => handleInputChange(e, 'mail')} required />
+            </div>
+          )}
+
+          {deliveryOption === 'local' && (
+            <div className="address-form local-delivery-form">
+              <h4>Local Delivery (New York City)</h4>
+              <p>We personally deliver to anywhere in New York City within 1 mile of any subway station.</p>
+              <input type="text" name="street" placeholder="Street Address" value={localAddress.street} onChange={(e) => handleInputChange(e, 'local')} required />
+              <input type="text" name="apt" placeholder="Apt, Suite, etc. (Optional)" value={localAddress.apt} onChange={(e) => handleInputChange(e, 'local')} />
+            </div>
+          )}
+          
+          <div className="payment-section">
+            <h4>Payment Details</h4>
+            {/* Render the PaymentElement; the clientSecret and appearance are provided by the Elements provider */}
+            <PaymentElement />
+            <button type="submit" disabled={!stripe || !elements || cartItems.length === 0}>
+              Pay ${finalTotal.toFixed(2)}
+            </button>
+          </div>
         </div>
       )}
     </form>
@@ -62,228 +125,3 @@ function Checkout() {
 }
 
 export default Checkout;
-
-
-// // frontend/src/components/Checkout.jsx
-// import React, { useEffect, useState } from 'react';
-// import { useCart } from './CartContext';
-// import { useNavigate } from 'react-router-dom';
-// import { apiService } from '../services/api';
-// import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-// import '../styles/Checkout.css';
-// import '../styles/SharedStyles.css';
-
-// function Checkout() {
-//   const { cartItems } = useCart();
-//   const [clientSecret, setClientSecret] = useState('');
-//   const navigate = useNavigate();
-  
-//   // These hooks now access the Elements context provided from App.jsx
-//   const stripe = useStripe();
-//   const elements = useElements();
-
-//   // Define the appearance for Stripe Elements
-//   const appearance = {
-//     theme: 'flat',
-//     variables: {
-//       colorPrimary: '#0570de',
-//       colorBackground: '#ffffff',
-//       colorText: '#30313d',
-//       colorDanger: '#df1b41',
-//       fontFamily: 'Ideal Sans, system-ui, sans-serif',
-//       spacingUnit: '2px',
-//       borderRadius: '4px',
-//     },
-//   };
-
-//   useEffect(() => {
-//     const createPaymentIntent = async () => {
-//       if (cartItems.length > 0) {
-//         try {
-//           const response = await apiService.post('/orders/create-payment-intent');
-//           setClientSecret(response.clientSecret);
-//         } catch (error) {
-//           console.error('Error creating payment intent:', error);
-//         }
-//       } else {
-//         navigate('/cart'); // Redirect to cart if no items
-//       }
-//     };
-
-//     createPaymentIntent();
-//   }, [cartItems, navigate]);
-
-//   const handlePayment = async () => {
-//     if (!stripe || !elements) {
-//       console.error('Stripe has not loaded yet.');
-//       return;
-//     }
-
-//     const cardElement = elements.getElement(CardElement);
-//     if (!cardElement) {
-//       console.error('CardElement is not available.');
-//       return;
-//     }
-
-//     const { error } = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: cardElement,
-//         billing_details: {
-//           name: 'Customer Name', // Replace with actual customer name when available
-//         },
-//       },
-//     });
-
-//     if (error) {
-//       console.error('Payment failed:', error);
-//       alert('Payment failed. Please try again.');
-//     } else {
-//       alert('Payment successful!');
-//       navigate('/order-confirmation');
-//     }
-//   };
-
-//   return (
-//     <div className="checkout-container">
-//       <h2>Checkout</h2>
-//       {cartItems.length === 0 ? (
-//         <p>Your cart is empty.</p>
-//       ) : (
-//         <div>
-//           <h3>Your Items:</h3>
-//           <ul>
-//             {cartItems.map(item => (
-//               <li key={item.order_item_id}>
-//                 {item.name} - ${item.price.toFixed(2)} x {item.quantity}
-//               </li>
-//             ))}
-//           </ul>
-//           {clientSecret ? (
-//             <>
-//               <CardElement className="StripeElement" options={{ style: { base: appearance } }} />
-//               <button onClick={handlePayment}>Pay Now</button>
-//             </>
-//           ) : (
-//             <p>Loading payment options...</p>
-//           )}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Checkout;
-
-
-// // frontend/src/components/Checkout.jsx
-// import React, { useEffect, useState } from 'react';
-// import { useCart } from './CartContext';
-// import { useNavigate } from 'react-router-dom';
-// import { apiService } from '../services/api';
-// import { loadStripe } from '@stripe/stripe-js';
-// import { useStripe, useElements, CardElement, Elements } from '@stripe/react-stripe-js';
-// import '../styles/Checkout.css';
-// import '../styles/SharedStyles.css';
-
-// const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
-// function Checkout() {
-//   const { cartItems } = useCart();
-//   const [clientSecret, setClientSecret] = useState('');
-//   const navigate = useNavigate();
-//   const stripe = useStripe();
-//   const elements = useElements();
-
-//   useEffect(() => {
-//     const createPaymentIntent = async () => {
-//       if (cartItems.length > 0) {
-//         try {
-//           const response = await apiService.post('/orders/create-payment-intent');
-//           setClientSecret(response.clientSecret);
-//         } catch (error) {
-//           console.error('Error creating payment intent:', error);
-//         }
-//       } else {
-//         navigate('/cart'); // Redirect to cart if no items
-//       }
-//     };
-
-//     createPaymentIntent();
-//   }, [cartItems, navigate]);
-
-//   const handlePayment = async () => {
-//     if (!stripe || !elements) {
-//       console.error('Stripe has not loaded yet.');
-//       return;
-//     }
-
-//     const cardElement = elements.getElement(CardElement);
-    
-//     // Check if cardElement is null
-//     if (!cardElement) {
-//       console.error('CardElement is not available.');
-//       return;
-//     }
-
-//     const { error } = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: cardElement,
-//         billing_details: {
-//           name: 'Customer Name', // Replace with actual customer name
-//         },
-//       },
-//     });
-
-//     if (error) {
-//       console.error('Payment failed:', error);
-//       alert('Payment failed. Please try again.');
-//     } else {
-//       alert('Payment successful!');
-//       // Optionally, redirect to a success page or clear the cart here
-//     }
-//   };
-
-//   // Define the appearance object for Stripe Elements
-//   const appearance = {
-//     theme: 'flat',
-//     variables: {
-//       colorPrimary: '#0570de', // Your primary brand color
-//       colorBackground: '#ffffff', // Background color for inputs
-//       colorText: '#30313d', // Default text color
-//       colorDanger: '#df1b41', // Color for errors
-//       fontFamily: 'Ideal Sans, system-ui, sans-serif', // Font family
-//       spacingUnit: '2px', // Spacing unit
-//       borderRadius: '4px', // Border radius for inputs
-//     },
-//   };
-
-//   return (
-//     <div className="checkout-container">
-//       <h2>Checkout</h2>
-//       {cartItems.length === 0 ? (
-//         <p>Your cart is empty.</p>
-//       ) : (
-//         <div>
-//           <h3>Your Items:</h3>
-//           <ul>
-//             {cartItems.map(item => (
-//               <li key={item.order_item_id}>
-//                 {item.name} - ${item.price.toFixed(2)} x {item.quantity}
-//               </li>
-//             ))}
-//           </ul>
-//           {clientSecret ? (
-//             <Elements stripe={stripePromise} options={{ appearance }}>
-//               <CardElement className="StripeElement" />
-//               <button onClick={handlePayment}>Pay Now</button>
-//             </Elements>
-//           ) : (
-//             <p>Loading payment options...</p>
-//           )}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Checkout;
