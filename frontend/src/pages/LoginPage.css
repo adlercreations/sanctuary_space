@@ -1,0 +1,69 @@
+/* Make the container take the full viewport and center the card */
+.auth-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fa; /* fallback background */
+  overflow: hidden;
+}
+
+/* Foliage or bottom image styling */
+.bottom-image {
+  position: absolute;
+  z-index: 1; /* Behind the card */
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 40vh;
+  background: url('../assets/foliage.png') no-repeat bottom center;
+  background-size: cover;
+  pointer-events: none; /* Allows clicks to pass through */
+  opacity: 0.85;
+}
+
+/* The login card is always on top */
+.auth-card {
+  position: relative;
+  z-index: 2; /* In front of the bottom image */
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2.5rem 2rem;
+  min-width: 340px;
+  max-width: 95vw;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .auth-card {
+    min-width: 90vw;
+    padding: 1.5rem 0.5rem;
+  }
+  .bottom-image {
+    height: 25vh;
+  }
+}
+
+/* Optional: Make sure error messages and links are visible */
+.auth-error {
+  color: #d32f2f;
+  background: #ffeaea;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-links {
+  margin-top: 1.5rem;
+  text-align: center;
+  width: 100%;
+} 

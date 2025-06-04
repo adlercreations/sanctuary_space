@@ -1,0 +1,112 @@
+.mood-board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.mood-board-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  aspect-ratio: 1; /* Make containers square */
+}
+
+.mood-board-item:hover {
+  transform: translateY(-5px);
+}
+
+.mood-board-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.delete-image-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #d56a47;
+  transition: all 0.2s ease;
+}
+
+.delete-image-btn:hover {
+  background: #d56a47;
+  color: white;
+}
+
+.add-image-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.add-image-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.add-image-form button {
+  padding: 0.75rem 1.5rem;
+  background: #d56a47;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.add-image-form button:hover {
+  background: #c2553f;
+}
+
+.error-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  background: #ffe6e6;
+  border: 1px solid #ffcccc;
+  border-radius: 4px;
+  color: #cc0000;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Empty state */
+.mood-board-grid p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.mood-board-item .caption {
+  padding: 1rem;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}

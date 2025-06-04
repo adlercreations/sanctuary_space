@@ -21,6 +21,9 @@ class User(db.Model, UserMixin):
     forum_replies = db.relationship("ForumReply", backref="author", lazy=True)
     blog_posts = db.relationship("BlogPost", backref="author", lazy=True)
     events = db.relationship("Event", backref="author", lazy=True)
+    garden_parties_organized = db.relationship("GardenParty", backref="organizer", lazy=True)
+    mood_board_images = db.relationship("MoodBoardImage", backref="added_by", lazy=True)
+    attending_parties = db.relationship('GardenParty', secondary='garden_party_attendees', backref=db.backref('party_attendees', lazy='dynamic'))
 
     def set_password(self, password):
         # Generate a salt and hash the password
@@ -89,13 +92,6 @@ class OrderItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer, default=1)
 
-class Product(db.Model):
-    __tablename__ = 'products'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    image_url = db.Column(db.String(250), nullable=True)
 
 # Forum Models
 class ForumThread(db.Model):
@@ -190,4 +186,71 @@ class Event(db.Model):
                 'id': self.author.id,
                 'username': self.author.username
             }
+        }
+
+class GardenParty(db.Model):
+    __tablename__ = 'garden_parties'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    location = db.Column(db.String(200), nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+    image_url = db.Column(db.String(500), nullable=False)
+    tea_selection = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    organizer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    attendees = db.relationship('User', secondary='garden_party_attendees', overlaps="attending_parties,party_attendees")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'date': self.date.isoformat(),
+            'time': self.time.isoformat(),
+            'location': self.location,
+            'capacity': self.capacity,
+            'image_url': self.image_url,
+            'tea_selection': self.tea_selection,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            'organizer': {
+                'id': self.organizer.id,
+                'username': self.organizer.username
+            },
+            'attendee_count': len(self.attendees)
+        }
+
+# Association table for garden party attendees
+garden_party_attendees = db.Table('garden_party_attendees',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('party_id', db.Integer, db.ForeignKey('garden_parties.id'), primary_key=True),
+    db.Column('rsvp_date', db.DateTime, default=datetime.utcnow)
+)
+
+class MoodBoardImage(db.Model):
+    __tablename__ = 'mood_board_images'
+    id = db.Column(db.Integer, primary_key=True)
+    image_url = db.Column(db.String(500), nullable=False)
+    caption = db.Column(db.String(200), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    added_by_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    display_order = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'image_url': self.image_url,
+            'caption': self.caption,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            'added_by': {
+                'id': self.added_by.id,
+                'username': self.added_by.username
+            },
+            'display_order': self.display_order
         }

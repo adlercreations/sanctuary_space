@@ -34,6 +34,21 @@ function HomePage() {
             <h2>Community</h2>
             <p>Join our forum, read our blog, see events</p>
           </Link>
+
+          <Link to="/tea-club" className="home-card tea-club-card">
+            <h2>Tea Club</h2>
+            <p>Join our exclusive tea tasting community</p>
+          </Link>
+
+          <Link to="/events" className="home-card events-card">
+            <h2>Events</h2>
+            <p>Discover our special gatherings and experiences</p>
+          </Link>
+
+          <Link to="/mood-board" className="home-card mood-board-card">
+            <h2>Mood Board</h2>
+            <p>Share and explore wellness inspiration</p>
+          </Link>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@
     justify-content: flex-start; /* Changed from center to flex-start */
     padding-top: 2rem;           /* Add top padding */
 }
+
   
 /* The top-right image */
 .top-right-image {
@@ -99,18 +100,55 @@
     font-weight: 700;
 }
   
-/* The cards container has a higher z-index to appear above .daytime-motif */
+/* Base styles for cards container */
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 4rem;
-    margin-bottom: 2rem;
-    z-index: 1; /* on top of the motif */
+    align-items: center;
+    gap: 1rem;
+    width: 1000px;
+    margin: 4rem auto 2rem auto;
+    z-index: 1;
     position: relative;
 }
-  
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+    .cards-container {
+        width: 100%;
+        max-width: 700px;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cards-container {
+        max-width: 500px;
+    }
+    
+    .title-image {
+        width: 90%;
+        max-width: 400px;
+        margin: 2rem 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cards-container {
+        gap: 1rem;
+    }
+    
+    .home-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .title-image {
+        max-width: 300px;
+    }
+}
+
 /* The individual cards */
 .home-card {
     background-color: white;
@@ -141,7 +179,7 @@
     
 
 .about-card:hover {
-    background-color: #c25539;
+    background-color: rgb(196, 88, 45);
 }
 
 .about-card:hover h2 {
@@ -157,7 +195,7 @@
 }
 
 .shop-card:hover {
-    background-color: #c25539;
+    background-color: rgb(196, 88, 45);
 }
 
 .shop-card:hover h2 {
@@ -173,10 +211,58 @@
 }
 
 .community-card:hover {
-    background-color: #c25539;
+    background-color: rgb(196, 88, 45);
 }
 
 .community-card:hover h2 {
+    color: black;
+}
+
+.tea-club-card {
+    background-color: #c1826a;
+}
+
+.tea-club-card h2 {
+    color: white;
+}
+
+.tea-club-card:hover {
+    background-color: rgb(196, 88, 45);
+}
+
+.tea-club-card:hover h2 {
+    color: black;
+}
+
+.events-card {
+    background-color: #c1826a;
+}
+
+.events-card h2 {
+    color: white;
+}
+
+.events-card:hover {
+    background-color: rgb(196, 88, 45);
+}
+
+.events-card:hover h2 {
+    color: black;
+}
+
+.mood-board-card {
+    background-color: #c1826a;
+}
+
+.mood-board-card h2 {
+    color: white;
+}
+
+.mood-board-card:hover {
+    background-color: rgb(196, 88, 45);
+}
+
+.mood-board-card:hover h2 {
     color: black;
 }
 

@@ -63,11 +63,20 @@ def login():
         email = data.get('email')
         password = data.get('password')
 
+        print(f"Login attempt for email: {email}")
+
         if not all([email, password]):
+            print("Missing email or password")
             return jsonify({"error": "Email and password are required"}), 400
 
         user = User.query.filter_by(email=email).first()
+        if not user:
+            print("User not found")
+        else:
+            print(f"User found: {user.email}, is_admin: {user.is_admin}")
+
         if not user or not user.check_password(password):
+            print("Invalid credentials")
             return jsonify({"error": "Invalid credentials"}), 401
 
         # Create tokens
@@ -184,3 +193,30 @@ def get_current_user():
             return jsonify({"user": None}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@auth_bp.route('/reset_password', methods=['POST'])
+@jwt_required()
+def reset_password():
+    """
+    Admin-only: Reset a user's password by email.
+    Body: { "email": "user@example.com", "new_password": "newpass123" }
+    """
+    current_user_id = get_jwt_identity()
+    admin_user = User.query.get(current_user_id)
+    if not admin_user or not admin_user.is_admin:
+        return jsonify({"error": "Admin privileges required"}), 403
+
+    data = request.get_json()
+    email = data.get('email')
+    new_password = data.get('new_password')
+
+    if not email or not new_password:
+        return jsonify({"error": "Email and new password required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user.set_password(new_password)
+    db.session.commit()
+    return jsonify({"message": f"Password reset for {email}"}), 200

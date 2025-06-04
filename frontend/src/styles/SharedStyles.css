@@ -1,22 +1,18 @@
 /* frontend/src/styles/SharedStyles.css */
 /* Shared bottom foliage border for all pages except entrance */
 .bottom-image {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
-    width: 100vw; /* Full width of the viewport */
-    height: 1000px; /* Increased height to show more of the image */
+    width: 100vw;
+    height: 1000px;
     background: url('/assets/FoliageBorder_1.png') no-repeat center bottom/cover;
     transform: rotate(180deg);
-    z-index: 0; /* Changed from 1 to 0 so it stays behind content */
-    margin-bottom: 0; /* Ensure no margin on the bottom */
-    background-position: center -30px; /* Adjust the vertical position of the background image */
-    pointer-events: none; /* Ensures clicks pass through the image to elements beneath */
+    z-index: 0;
+    margin-bottom: 0;
+    background-position: center -30px;
+    pointer-events: none;
     filter: saturate(2) brightness(0.95);
-
-    /* FADE MASK: fully opaque up through 66% of element,
-       then fade to transparent at the element’s bottom
-       (which, after rotate(180deg), is the visual top) */
     mask-image: linear-gradient(
       to bottom,
       black 0%,
@@ -33,4 +29,33 @@
     -webkit-mask-size: 100% 100%;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
+}
+
+/* Styles for non-home pages */
+.page-container:not(.home-container) {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 200px;
+}
+
+.page-container:not(.home-container) .content-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-container:not(.home-container) .page-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.page-container:not(.home-container) .content-text {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

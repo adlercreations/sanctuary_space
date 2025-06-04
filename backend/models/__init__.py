@@ -3,4 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-from .models import User, Product, Order, OrderItem, ForumThread, ForumComment, ForumReply, BlogPost, Event
+# Explicitly register the models
+from .product import Product
+from .models import (
+    User, Order, OrderItem, ForumThread, 
+    ForumComment, ForumReply, BlogPost, 
+    Event, MoodBoardImage
+)

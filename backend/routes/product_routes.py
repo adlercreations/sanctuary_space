@@ -56,6 +56,13 @@ def update_product(product_id):
         return jsonify({"error": "Product not found"}), 404
 
     data = request.get_json()
+
+    if 'name' in data:
+        product.name = data['name']
+    if 'price' in data:
+        product.price = data['price']
+    if 'description' in data:
+        product.description = data['description']
     if 'image_url' in data:
         product.image_url = data['image_url']
     
