@@ -18,19 +18,19 @@ function EventsPage() {
         <div className="event-section">
           <h2>Garden Parties</h2>
           <p>Experience our seasonal garden gatherings with tea tastings and mindful activities.</p>
-          <Link to="/events/garden-parties" className="section-link">Party</Link>
+          <Link to="/events/garden-parties" className="event-link">Party</Link>
         </div>
         
         <div className="event-section">
           <h2>Dinner Club</h2>
           <p>Join our intimate dinner experiences featuring seasonal, mindful dining.</p>
-          <Link to="/events/dinner-club" className="section-link">Dine</Link>
+          <Link to="/events/dinner-club" className="event-link">Dine</Link>
         </div>
         
         <div className="event-section">
           <h2>Tea Club</h2>
           <p>Participate in our exclusive tea tasting events and enlightening ceremonies.</p>
-          <Link to="/events/tea-club" className="section-link">Drink</Link>
+          <Link to="/events/tea-club" className="event-link">Drink</Link>
         </div>
       </div>
     </div>

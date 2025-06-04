@@ -50,7 +50,7 @@
   color: var(--text-color);
 }
 
-.section-link {
+.event-link {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: 1.2rem;
@@ -63,7 +63,7 @@
   transition: background-color 0.2s ease;
 }
 
-.section-link:hover {
+.event-link:hover {
   background-color: #DFFF00;
 }
 
